@@ -145,7 +145,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, 0, 0, width + EXTRA_WIDTH, height + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+   // the third parameter of the CreateWindowW method accepts a bitmask where you can specify which styles to use
+   // you can see all of the available window styles here: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles?redirectedfrom=MSDN
+   // here, we create a window with the following style:
+   // - WS_VISIBLE:    The window is initially visible (so that we can see it at the start)
+   // - WS_CAPTION:    The window has a title bar showing its name. This bit also includes WS_BORDER so we don't need to state it again.
+   // - WS_SYSMENU:    The window has a window menu on its title bar. This allows users to click on the "X" button on the right to close it.
+   // We didn't include a minimize (WS_MINIMIZEBOX) and maximize button (WS_MAXIMIZEBOX) because we don't require it
+   // and we also don't want to resize the window.
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, width + EXTRA_WIDTH, height + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    InitOpenGL();
 
