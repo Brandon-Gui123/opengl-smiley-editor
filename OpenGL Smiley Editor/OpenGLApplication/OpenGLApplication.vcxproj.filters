@@ -36,6 +36,9 @@
     <ClInclude Include="BrandonUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UserDefinedConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenGLApplication.cpp">
