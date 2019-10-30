@@ -4,6 +4,8 @@
 #include "framework.h"
 #include "OpenGLApplication.h"
 
+#include "Program.h"    // custom class to abstract all these
+
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
 
@@ -23,6 +25,8 @@ HGLRC hRC = NULL;                       // A handle to an OpenGL Rendering Conte
 HINSTANCE hInst;                        // current instance
 WCHAR szTitle[MAX_LOADSTRING];          // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];    // the main window class name
+
+Program *ptrProgram = new Program();
 
 // Pixel Format Descriptor
 static PIXELFORMATDESCRIPTOR pfd
@@ -326,4 +330,8 @@ void DrawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0, 0, 0.8f, 1);
+
+    // calls the member method named "Draw"
+    // this is where all our drawing happen
+    ptrProgram->Draw();
 }

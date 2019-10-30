@@ -4,6 +4,9 @@
 #define PROGRAM_H
 
 class Program
-{};
+{
+public:
+    void Draw();
+};
 
 #endif
