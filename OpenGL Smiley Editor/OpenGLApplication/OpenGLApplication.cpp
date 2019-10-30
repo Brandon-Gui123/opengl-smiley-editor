@@ -208,6 +208,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
     case WM_DESTROY:
         PostQuitMessage(0);
+
+        // deallocate memory occupied by the Program instance
+        // then set its pointer to nullptr to prevent dangling pointers
+        delete ptrProgram; ptrProgram = nullptr;
+
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -331,7 +336,11 @@ void DrawGLScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0, 0, 0.8f, 1);
 
-    // calls the member method named "Draw"
-    // this is where all our drawing happen
-    ptrProgram->Draw();
+    // check to see if the pointer to the Program instance is NOT a null pointer
+    // then allow execution
+    // this helps to prevent undefined behaviour
+    if (ptrProgram != nullptr)
+    {
+        ptrProgram->Draw();
+    }
 }
