@@ -35,4 +35,21 @@ public:
 
     /// <summary>Returns a vector that has all of its values divided by the specified multiplier</summary>
     friend Vector2f operator/(const Vector2f &vector, float divisor);
+
+    // This operator is overloaded using a member function
+    // Because this is a member function, you have access to "this".
+    // The return type can be void, but if we did it that way, we can no longer chain operators (e.g. a + b += c)
+    /// <summary>Adds a the vector on the right to the vector on the left of this operand.</summary>
+    Vector2f operator+=(Vector2f addend);
+
+    /// <summary>Subtracts the vector on the left of this operand with the one on the right.</summary>
+    Vector2f operator-=(Vector2f minuend);
+
+    /// <summary>Multiplies the vector on the left of this operand with the float on the right</summary>
+    Vector2f operator*=(float multiplier);
+
+    /// <summary>Divides the vector on the left of this operand with the float on the right.</summary>
+    Vector2f operator/=(float divisor);
+};
+
 #endif
