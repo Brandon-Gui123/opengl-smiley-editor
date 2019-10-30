@@ -334,7 +334,7 @@ void ReSizeGLScene(GLsizei width, GLsizei height)
 void DrawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0, 0, 0.8f, 1);
+    glClearColor(1, 1, 1, 1);
 
     // check to see if the pointer to the Program instance is NOT a null pointer
     // then allow execution
