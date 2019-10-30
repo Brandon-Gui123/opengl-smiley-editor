@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BrandonUtils.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="OpenGLApplication.h" />
     <ClInclude Include="Program.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Vector2f.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BrandonUtils.cpp" />
     <ClCompile Include="OpenGLApplication.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Vector2f.cpp" />
