@@ -157,11 +157,13 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="OpenGLApplication.h" />
+    <ClInclude Include="Program.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenGLApplication.cpp" />
+    <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OpenGLApplication.rc" />
