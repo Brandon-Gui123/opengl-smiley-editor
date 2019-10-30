@@ -9,6 +9,8 @@
 /// </summary>
 namespace BrandonUtils
 {
+    /// <summary>Converts a number from an old range to a new range.</summary>
+    float map(float current, float oldMin, float oldMax, float newMin, float newMax);
 }
 
 #endif
