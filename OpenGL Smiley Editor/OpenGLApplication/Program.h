@@ -7,6 +7,8 @@ class Program
 {
 public:
     void Draw();
+
+    void DrawGrayAxes();
 };
 
 #endif

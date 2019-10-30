@@ -1,4 +1,26 @@
 #include "Program.h"
 
+#include "framework.h"  // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
+
+#include <gl/GL.h>  // OpenGL 32-bit library
+#include <gl/GLU.h> // GLU 32-bit library
+
 void Program::Draw()
-{}
+{
+    DrawGrayAxes();
+}
+
+void Program::DrawGrayAxes()
+{
+    glBegin(GL_LINES);  // every 2 vertices creates a line
+        // draw the horizontal (x) axis
+        glColor3f(0.75f, 0.75f, 0.75f);
+        glVertex2f(0, 0);
+        glVertex2f(1, 0);
+
+        // draw the vertical (y) axis
+        glColor3f(0.75f, 0.75f, 0.75f);
+        glVertex2f(0, 0);
+        glVertex2f(0, 1);
+    glEnd();
+}
