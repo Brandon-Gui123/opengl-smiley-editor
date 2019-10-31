@@ -1,6 +1,6 @@
 #include "BrandonUtils.h"
 
-// for user-defined mathematical constants, like epsilon
+// for user-defined consants, like the epsilon
 #include "UserDefinedConstants.h"
 
 #include <cmath>    // for fabs(), which returns the positive value for a given number
@@ -51,4 +51,14 @@ bool BrandonUtils::isApproximatelyEqual(float first, float second)
     float relativeEpsilon = largerValue * USER_DEFINED_MATH_EPSILON;
 
     return fabs(first - second) <= relativeEpsilon;
+}
+
+Vector2f BrandonUtils::winCoordsToOpenGL(const Vector2f &winCoords, const Vector2f &winSize)
+{
+    return Vector2f(map(winCoords.x, 0, winSize.x, -1, 1), map(winCoords.y, 0, winSize.y, 1, -1));
+}
+
+Vector2f BrandonUtils::openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize)
+{
+    return Vector2f(map(openGLCoords.x, -1, 1, 0, winSize.x), map(openGLCoords.y, 1, -1, 0, winSize.y));
 }

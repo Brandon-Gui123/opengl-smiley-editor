@@ -3,6 +3,8 @@
 #ifndef BRANDON_UTILS_H
 #define BRANDON_UTILS_H
 
+#include "Vector2f.h"
+
 /// <summary>
 /// A namespace containing commonly-used functionality in this program, such as converting from
 /// OpenGL coordinates to Windows coordinates.
@@ -18,6 +20,16 @@ namespace BrandonUtils
     /// This is Donald Knuth's algorithm on relative epsilons.
     /// </summary>
     bool isApproximatelyEqual(float first, float second);
+
+    /// <summary>
+    /// Converts the given vector from window coordinates to OpenGL coordinates, with a specified window size.
+    /// </summary>
+    Vector2f winCoordsToOpenGL(const Vector2f &winCoords, const Vector2f &winSize);
+
+    /// <summary>
+    /// Converts the given vector from OpenGL coordinates to window coordinates, with a specified window size.
+    /// </summary>
+    Vector2f openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize);
 }
 
 #endif
