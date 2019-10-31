@@ -59,6 +59,12 @@ void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, in
     glEnd();
 }
 
+void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart)
+{
+    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, Color3f(0, 0, 1));  // left eye
+    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, Color3f(0, 0, 1));  // right eye
+}
+
 void Smiley::Draw()
 {
 }
