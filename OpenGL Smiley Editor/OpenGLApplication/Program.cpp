@@ -2,12 +2,18 @@
 
 #include "framework.h"  // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
 
+#include "Vector2f.h"
+#include "Smiley.h"
+
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
+
+Smiley smiley = Smiley(Vector2f(0, 0), 0.25f);
 
 void Program::Draw()
 {
     DrawGrayAxes();
+    smiley.Draw();
 }
 
 void Program::DrawGrayAxes()

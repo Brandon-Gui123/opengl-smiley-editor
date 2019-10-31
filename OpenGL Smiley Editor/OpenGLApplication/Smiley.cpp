@@ -70,4 +70,13 @@ void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart)
 
 void Smiley::Draw()
 {
+    // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
+    // the face of the smiley
+    DrawCircle(position, radius, Color3f(0, 0, 1));
+
+    // the eyes of the smiley
+    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f));
+
+    // the smile
+    DrawArc(position, radius * (5.f / 8.f), 120, 240, Color3f(0, 0, 1));
 }
