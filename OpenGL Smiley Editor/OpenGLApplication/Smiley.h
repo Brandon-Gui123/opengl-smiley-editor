@@ -15,7 +15,7 @@ private:
     // radius - how big and far will the arc be from the center
     // startAngle - the angle to start the arc
     // endAngle - the angle to end the arc
-    // arcColour - the colour of thr arc
+    // arcColour - the colour of the arc
     // resolution - determines the accuracy of the arc. Higher resolution results in rounder arcs
     void DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution = 20);
 
