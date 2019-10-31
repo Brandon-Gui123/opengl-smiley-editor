@@ -58,3 +58,7 @@ void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, in
 
     glEnd();
 }
+
+void Smiley::Draw()
+{
+}

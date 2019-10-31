@@ -24,6 +24,11 @@ private:
     /// The resolution of the circle changes how round the circle will appear.
     /// </summary>
     void DrawCircle(Vector2f position, float radius, Color3f circleColor, int resolution = 20);
+public:
+    /// Callback Functions ///
+
+    /// <summary>Callback function that draws the smiley.</summary>
+    void Draw();
 };
 
 #endif
