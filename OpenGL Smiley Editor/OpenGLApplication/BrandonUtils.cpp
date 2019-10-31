@@ -3,7 +3,8 @@
 // for user-defined consants, like the epsilon
 #include "UserDefinedConstants.h"
 
-#include <cmath>    // for fabs(), which returns the positive value for a given number
+#define _USE_MATH_DEFINES   // for using mathematical constants defined in the math library
+#include <cmath>            // for mathematical functions like sin, cos and fabs
 
 float BrandonUtils::map(float current, float oldMin, float oldMax, float newMin, float newMax)
 {
@@ -61,4 +62,18 @@ Vector2f BrandonUtils::winCoordsToOpenGL(const Vector2f &winCoords, const Vector
 Vector2f BrandonUtils::openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize)
 {
     return Vector2f(map(openGLCoords.x, -1, 1, 0, winSize.x), map(openGLCoords.y, 1, -1, 0, winSize.y));
+}
+
+float BrandonUtils::degToRad(float degrees)
+{
+    // 180 degrees is PI radians
+    // 1 degree is therefore PI / 180 radians
+    return degrees * (M_PI / 180);
+}
+
+float BrandonUtils::radToDeg(float radians)
+{
+    // PI radians is 180 degrees
+    // 1 radian is therefore 180 / PI degrees
+    return radians * (180 / M_PI);
 }

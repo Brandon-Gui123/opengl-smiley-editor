@@ -30,6 +30,12 @@ namespace BrandonUtils
     /// Converts the given vector from OpenGL coordinates to window coordinates, with a specified window size.
     /// </summary>
     Vector2f openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize);
+
+    /// <summary>Converts the specified degree value to radians</summary>
+    float degToRad(float degrees);
+
+    /// <summary>Converts the specified radian value to degrees</summary>
+    float radToDeg(float radians);
 }
 
 #endif
