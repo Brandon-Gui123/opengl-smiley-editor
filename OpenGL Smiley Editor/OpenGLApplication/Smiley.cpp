@@ -9,6 +9,9 @@
 #include <gl/GLU.h> // GLU 32-bit library
 #include <cmath>    // for math functions like sin and cos
 
+Smiley::Smiley(Vector2f position, float radius) : position(position), radius(radius)
+{}
+
 void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution)
 {
     // we will be placing a new vertex at every "step"

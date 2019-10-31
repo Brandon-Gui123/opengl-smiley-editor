@@ -8,6 +8,13 @@
 
 class Smiley
 {
+public:
+
+    Vector2f position;
+    float radius;
+
+    Smiley(Vector2f position, float radius);
+
 private:
 
     // Draws an arc which starts at a specified start angle and ends at a specified end angle.
