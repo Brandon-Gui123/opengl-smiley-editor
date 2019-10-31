@@ -40,3 +40,21 @@ void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float en
 
     glEnd();
 }
+
+void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, int resolution)
+{
+    // a new vertex will be placed at every "step"
+    float step = 360.f / resolution;
+
+    glColor3f(circleColor.red, circleColor.green, circleColor.blue);
+    glBegin(GL_LINE_LOOP);
+        
+        for (int i = 0; i < resolution; i++)
+        {
+            // convert from degrees to radians, convert from polar coordinates to cartesian coordinates,
+            // then place the vertex down relative to the specified position
+            glVertex2f(position.x + radius * sin(BrandonUtils::degToRad(step * i)), position.y + radius * cos(BrandonUtils::degToRad(step * i)));
+        }
+
+    glEnd();
+}
