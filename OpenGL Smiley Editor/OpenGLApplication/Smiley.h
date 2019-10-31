@@ -4,7 +4,8 @@
 #define SMILEY_H
 
 #include "Vector2f.h"   // for positions
-#include "Color3f.h"    // for colours
+#include "Color3f.h"    // for colour values
+
 class Smiley
 {
 private:

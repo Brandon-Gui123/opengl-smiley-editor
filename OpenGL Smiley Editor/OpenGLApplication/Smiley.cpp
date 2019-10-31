@@ -2,6 +2,8 @@
 
 #include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
 #include "BrandonUtils.h"   // for converting from degrees to radians
+#include "Vector2f.h"   // for positions
+#include "Color3f.h"    // for colours
 
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
