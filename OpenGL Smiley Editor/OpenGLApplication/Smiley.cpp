@@ -26,7 +26,7 @@ void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float en
     glBegin(GL_LINE_STRIP);
 
         // begin with a vertex at the start angle (we do this so that we can close the arc if it becomes 360)
-        glVertex2f(radius * sin(BrandonUtils::degToRad(currentAngle)), radius * cos(BrandonUtils::degToRad(currentAngle)));
+        glVertex2f(position.x + radius * sin(BrandonUtils::degToRad(currentAngle)), position.y + radius * cos(BrandonUtils::degToRad(currentAngle)));
 
         while (currentAngle < correctedEndAngle)
         {
