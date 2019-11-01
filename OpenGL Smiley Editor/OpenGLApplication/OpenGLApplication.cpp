@@ -155,6 +155,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // and we also don't want to resize the window.
    hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, width + EXTRA_WIDTH, height + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
+   // set the window title name to my name, as per the requirements
+   // L"any string here" is a wchar_t literal
+   SetWindowTextW(hWnd, L"IGRA Assignment 1: Brandon Gui");
+
    InitOpenGL();
 
    if (!hWnd)
