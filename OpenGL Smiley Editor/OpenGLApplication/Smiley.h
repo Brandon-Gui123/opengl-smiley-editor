@@ -35,6 +35,12 @@ private:
     /// <summary> Draws the eyes of the smiley at the position, with a specified distance apart.</summary>
     void DrawEyes(Vector2f position, float eyeRadius, float distanceApart);
 
+    /// <summary>
+    /// Draws the mouth of the smiley at the specified position with the specified distance, and whether to
+    /// flip it around.
+    /// </summary>
+    void DrawMouth(Vector2f position, float radius, bool upsideDown);
+
 public:
     /// Callback Functions ///
 

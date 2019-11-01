@@ -68,6 +68,20 @@ void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart)
     DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, Color3f(0, 0, 1));  // right eye
 }
 
+void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown)
+{
+    if (upsideDown)
+    {
+        // note that drawing the arcs upside down require us to re-position it so that it looks like it is still in the same place
+        // since this is the upper part of the circle
+        DrawArc(position - Vector2f(0, radius * 1.5f), radius, 300, 60, Color3f(0, 0, 1));
+    }
+    else
+    {
+        DrawArc(position, radius, 120, 240, Color3f(0, 0, 1));
+    }
+}
+
 void Smiley::Draw()
 {
     // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
@@ -78,5 +92,11 @@ void Smiley::Draw()
     DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f));
 
     // the smile
-    DrawArc(position, radius * (5.f / 8.f), 120, 240, Color3f(0, 0, 1));
+    //DrawArc(position, radius * (5.f / 8.f), 120, 240, Color3f(0, 0, 1));
+
+    // the upside down smile
+    //DrawArc(position - Vector2f(0, radius), radius * (5.f / 8.f), 300, 60, Color3f(0, 0, 1));
+
+    // the mouth
+    DrawMouth(position, radius * (5.f / 8.f), true);
 }
