@@ -1,10 +1,22 @@
 #include "Vector2f.h"
 
+#include <cmath>    // for sqrtf, which finds the square root of a float
+
 Vector2f::Vector2f() : x(0.f), y(0.f)
 {}
 
 Vector2f::Vector2f(float x, float y) : x(x), y(y)
 {}
+
+float Vector2f::getMagnitude()
+{
+    return sqrtf(x * x + y * y);
+}
+
+float Vector2f::getSqrMagnitude()
+{
+    return x * x + y * y;
+}
 
 Vector2f operator+(const Vector2f &first, const Vector2f &second)
 {

@@ -19,6 +19,15 @@ public:
     /// <summary>Constructs a Vector2f with the specified parameters for the x and y values.</summary>
     Vector2f(float x, float y);
     
+    /// <summary>Gets the length of this vector.</summary>
+    float getMagnitude();
+
+    /// <summary>
+    /// Gets the square of the length of this vector. 
+    /// Use this if you're just comparing distances since this is faster due to the lack of the square root function.
+    /// </summary>
+    float getSqrMagnitude();
+
     /// Operator Overloads ///
     // This operator is overloaded using a member function
     // Because this is a member function, you have access to "this".
