@@ -19,6 +19,7 @@ public:
     /// <summary>Constructs a Vector2f with the specified parameters for the x and y values.</summary>
     Vector2f(float x, float y);
     
+    /// Operator Overloads ///
     // This operator is overloaded using a member function
     // Because this is a member function, you have access to "this".
     // The return type can be void, but if we did it that way, we can no longer chain operators (e.g. a + b += c)
