@@ -231,7 +231,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // TODO: Optimize so that you don't keep returning a Vector2f (does constantly returning something cause performance problems?)
             // convert the current mouse coordinates to OpenGL coordinates
-            ptrProgram->OnMouseMove(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            ptrProgram->OnMouseMove(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)), wParam);
             break;
         }
         case WM_LBUTTONDOWN:

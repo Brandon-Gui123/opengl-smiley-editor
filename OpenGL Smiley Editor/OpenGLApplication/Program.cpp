@@ -32,8 +32,9 @@ void Program::DrawGrayAxes()
     glEnd();
 }
 
-void Program::OnMouseMove(const Vector2f &openGL_mousePos)
+void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 {
+    smiley.MouseMoved(openGL_mousePos, wParam);
 }
 
 void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
