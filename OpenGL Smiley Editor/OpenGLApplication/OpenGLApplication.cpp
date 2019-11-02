@@ -4,7 +4,9 @@
 #include "framework.h"
 #include "OpenGLApplication.h"
 
-#include "Program.h"    // custom class to abstract all these
+#include "Program.h"        // custom class to abstract all these
+#include "BrandonUtils.h"   // for converting from window coordinates to OpenGL coordinates
+#include "Vector2f.h"       // for mouse position
 
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
@@ -18,6 +20,7 @@
 // Global Variables:
 int width = 400;
 int height = 400;
+Vector2f mousePosition = Vector2f();
 GLuint PixelFormat;                     // Type is an OpenGL pre-defined unsigned int. These types ensure cross-platform compatibility.
 HDC hDC = NULL;                         // A handle to the device context
 HWND hWnd = NULL;                       // A handle to the window
@@ -179,33 +182,36 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //  PURPOSE: Processes messages for the main window.
 //
-//  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
-//  WM_DESTROY  - post a quit message and return
-//
+//  WM_COMMAND      - process the application menu
+//  WM_PAINT        - Paint the main window
+//  WM_DESTROY      - post a quit message and return
+//  WM_SIZE         - called when the window is resized
+//  WM_MOUSEMOVE    - called when the cursor is moved inside the window
+//  WM_LBUTTONDOWN  - called when the left mouse button is pressed while the cursor is inside the window
+//  WM_RBUTTONDOWN  - called when the right mouse button is pressed while the cursor is inside the window
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_COMMAND:
+        case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
             switch (wmId)
             {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
+                case IDM_ABOUT:
+                    DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+                    break;
+                case IDM_EXIT:
+                    DestroyWindow(hWnd);
+                    break;
+                default:
+                    return DefWindowProc(hWnd, message, wParam, lParam);
             }
         }
         break;
-    case WM_PAINT:
+        case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
@@ -213,21 +219,49 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
-    case WM_SIZE:
+        case WM_SIZE:
         {
         ReSizeGLScene(LOWORD(lParam), LOWORD(lParam));
         break;
         }
-    case WM_DESTROY:
-        PostQuitMessage(0);
+        case WM_MOUSEMOVE:
+        {
+            mousePosition.x = LOWORD(lParam);
+            mousePosition.y = HIWORD(lParam);
 
-        // deallocate memory occupied by the Program instance
-        // then set its pointer to nullptr to prevent dangling pointers
-        delete ptrProgram; ptrProgram = nullptr;
+            // TODO: Optimize so that you don't keep returning a Vector2f (does constantly returning something cause performance problems?)
+            // convert the current mouse coordinates to OpenGL coordinates
+            ptrProgram->OnMouseMove(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            break;
+        }
+        case WM_LBUTTONDOWN:
+        {
+            mousePosition.x = LOWORD(lParam);
+            mousePosition.y = HIWORD(lParam);
 
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+            // convert current mouse coordinates to OpenGL coordinates
+            ptrProgram->OnLMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            break;
+        }
+        case WM_RBUTTONDOWN:
+        {
+            mousePosition.x = LOWORD(lParam);
+            mousePosition.y = HIWORD(lParam);
+
+            // convert current mouse coordinates to OpenGL coordinates
+            ptrProgram->OnRMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            break;
+        }
+        case WM_DESTROY:
+            PostQuitMessage(0);
+
+            // deallocate memory occupied by the Program instance
+            // then set its pointer to nullptr to prevent dangling pointers
+            delete ptrProgram; ptrProgram = nullptr;
+
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
 }
