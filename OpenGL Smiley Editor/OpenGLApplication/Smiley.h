@@ -8,10 +8,12 @@
 
 class Smiley
 {
-public:
-
+private:
+    
     Vector2f position;
     float radius;
+
+public:
 
     Smiley(Vector2f position, float radius);
 
