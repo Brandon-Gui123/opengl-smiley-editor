@@ -3,6 +3,7 @@
 #include "framework.h"  // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
 
 #include "Vector2f.h"
+#include "BrandonUtils.h"
 #include "Smiley.h"
 
 #include <gl/GL.h>  // OpenGL 32-bit library
@@ -30,3 +31,15 @@ void Program::DrawGrayAxes()
         glVertex2f(0, 1);
     glEnd();
 }
+
+void Program::OnMouseMove(const Vector2f &openGL_mousePos)
+{
+}
+
+void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
+{
+
+}
+
+void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
+{}
