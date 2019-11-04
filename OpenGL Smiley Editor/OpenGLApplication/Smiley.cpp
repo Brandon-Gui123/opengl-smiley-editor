@@ -79,6 +79,11 @@ void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown)
     else
     {
         DrawArc(position, radius, 120, 240, Color3f(0, 0, 1));
+
+bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
+{
+    return (openGL_mousePosition - position).getSqrMagnitude() < radius * radius;
+}
     }
 }
 

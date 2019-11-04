@@ -43,6 +43,10 @@ private:
     /// </summary>
     void DrawMouth(Vector2f position, float radius, bool upsideDown);
 
+    /// <summary>Returns a boolean based on whether the mouse cursor is inside the smiley.</summary>
+    bool IsCursorInside(const Vector2f &openGL_mousePosition);
+    
+
 public:
     /// Callback Functions ///
 
