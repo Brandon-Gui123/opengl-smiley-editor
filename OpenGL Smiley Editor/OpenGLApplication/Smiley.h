@@ -14,7 +14,6 @@ private:
     float radius;
     bool isSelected{false};
 
-public:
     float minRadius{20.f / 400.f};
     float maxRadius{400.f / 400.f};
 
