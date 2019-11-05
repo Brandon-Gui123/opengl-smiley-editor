@@ -60,7 +60,6 @@ private:
     /// <summary>Returns a boolean based on whether the mouse cursor is inside the smiley.</summary>
     bool IsCursorInside(const Vector2f &openGL_mousePosition);
     
-
 public:
     /// Callback Functions ///
 

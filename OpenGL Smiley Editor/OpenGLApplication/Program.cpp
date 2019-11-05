@@ -39,7 +39,7 @@ void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 
 void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
 {
-
+    smiley.OnLMouseButtonDown(openGL_mousePos);
 }
 
 void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
