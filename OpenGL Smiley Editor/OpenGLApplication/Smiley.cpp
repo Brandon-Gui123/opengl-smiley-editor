@@ -124,12 +124,12 @@ void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
         // when the user holds down the ctrl key moves the mouse
         initialRadiusWhenSelected = radius;
 
-        // calculate a vector that points from the mouse cursor to the center of the smiley
-        // this will be used to offset the effects of our mouse cursor to the smiley so it doesn't resize
-        // abruptly during mouse movement
-        cursorPositionDiff = openGL_mousePosition - position;
+        // keep track of the position of the cursor when the Smiley is clicked
+        // this would help prevent incorrect radius scaling due to distance from origin of the OpenGL space
+        cursorPositionWhenSelected = openGL_mousePosition;
     }
 }
+
 void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wParam)
 {
     if (isSelected)
@@ -138,7 +138,7 @@ void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wPa
         if ((wParam & (MK_CONTROL | MK_LBUTTON)) == ((MK_CONTROL | MK_LBUTTON)))
         {
             // depending on how far the cursor has travelled, resize the radius of the smiley
-            radius = initialRadiusWhenSelected + openGL_mousePosition.x - cursorPositionDiff.x;
+            radius = initialRadiusWhenSelected + openGL_mousePosition.x - cursorPositionWhenSelected.x;
 
             // clamp the radius of the smiley to prevent it from becoming too big or too small
             if      (radius < minRadius) radius = minRadius;
