@@ -46,13 +46,14 @@ void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float en
     glEnd();
 }
 
-void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, int resolution)
+void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColour, bool colorOutline, int resolution)
 {
     // a new vertex will be placed at every "step"
     float step{360.f / resolution};
-
-    glColor3f(circleColor.red, circleColor.green, circleColor.blue);
-    glBegin(GL_LINE_LOOP);
+    
+    // drawing the outline of the circle
+    glColor3f(circleColour.red, circleColour.green, circleColour.blue);
+    glBegin(colorOutline ? GL_LINE_LOOP : GL_POLYGON);
         
         for (int i{0}; i < resolution; i++)
         {
@@ -64,10 +65,19 @@ void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, in
     glEnd();
 }
 
+void Smiley::DrawFace(Vector2f position, float radius, Color3f faceOutlineColor, int resolution)
+{
+    // draws a circle filled with white colour acting as the base
+    DrawCircle(position, radius, Color3f(1.f, 1.f, 1.f), false, resolution);
+
+    // draws an outline of the circle
+    DrawCircle(position, radius, faceOutlineColor, true, resolution);
+}
+
 void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart, Color3f eyeColor)
 {
-    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor);  // left eye
-    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor);  // right eye
+    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // left eye
+    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // right eye
 }
 
 void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown, Color3f mouthColor)
@@ -97,7 +107,7 @@ void Smiley::Draw()
 
     // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
     // the face of the smiley
-    DrawCircle(position, radius, color);
+    DrawFace(position, radius, color);
 
     // the eyes of the smiley
     DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f), color);
