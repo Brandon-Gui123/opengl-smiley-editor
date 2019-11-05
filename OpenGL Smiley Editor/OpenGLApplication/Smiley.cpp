@@ -2,25 +2,27 @@
 
 #include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
 #include "BrandonUtils.h"   // for converting from degrees to radians
-#include "Vector2f.h"   // for positions
-#include "Color3f.h"    // for colours
+#include "Vector2f.h"       // for positions
+#include "Color3f.h"        // for colours
 
-#include <gl/GL.h>  // OpenGL 32-bit library
-#include <gl/GLU.h> // GLU 32-bit library
-#include <cmath>    // for math functions like sin and cos
+#include <gl/GL.h>          // OpenGL 32-bit library
+#include <gl/GLU.h>         // GLU 32-bit library
+#include <cmath>            // for math functions like sin and cos
 
 Smiley::Smiley(Vector2f position, float radius) : position(position), radius(radius)
 {}
 
+///// Drawing Methods /////
+
 void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution)
 {
     // we will be placing a new vertex at every "step"
-    float step = 360.f / resolution;
+    float step{360.f / resolution};
     
-    float currentAngle = startAngle;
+    float currentAngle{startAngle};
 
     // for cases where the start angle is more than the end angle, we add 360 degrees so that the function can keep drawing over 360
-    float correctedEndAngle = (startAngle > endAngle) ? endAngle + 360.f : endAngle;
+    float correctedEndAngle{(startAngle > endAngle) ? endAngle + 360.f : endAngle};
 
     glColor3f(arcColor.red, arcColor.green, arcColor.blue);
     glBegin(GL_LINE_STRIP);
@@ -47,12 +49,12 @@ void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float en
 void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, int resolution)
 {
     // a new vertex will be placed at every "step"
-    float step = 360.f / resolution;
+    float step{360.f / resolution};
 
     glColor3f(circleColor.red, circleColor.green, circleColor.blue);
     glBegin(GL_LINE_LOOP);
         
-        for (int i = 0; i < resolution; i++)
+        for (int i{0}; i < resolution; i++)
         {
             // convert from degrees to radians, convert from polar coordinates to cartesian coordinates,
             // then place the vertex down relative to the specified position

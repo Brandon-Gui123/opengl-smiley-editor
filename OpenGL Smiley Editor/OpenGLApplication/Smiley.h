@@ -12,10 +12,17 @@ private:
     
     Vector2f position;
     float radius;
+    bool isSelected{false};
 
 public:
+    float minRadius{20.f / 400.f};
+    float maxRadius{400.f / 400.f};
 
     Smiley(Vector2f position, float radius);
+    Vector2f cursorPositionDiff{};              // The position difference between the cursor and the smiley when it is clicked
+    float initialRadiusWhenSelected{};          // The radius of the smiley when it is selected
+
+    bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
 
 private:
 

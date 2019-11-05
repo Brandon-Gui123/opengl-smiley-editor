@@ -18,9 +18,9 @@
 #define EXTRA_HEIGHT 60
 
 // Global Variables:
-int width = 400;
-int height = 400;
-Vector2f mousePosition = Vector2f();
+int width{400};
+int height{400};
+Vector2f mousePosition{};
 GLuint PixelFormat;                     // Type is an OpenGL pre-defined unsigned int. These types ensure cross-platform compatibility.
 HDC hDC = NULL;                         // A handle to the device context
 HWND hWnd = NULL;                       // A handle to the window
@@ -29,7 +29,7 @@ HINSTANCE hInst;                        // current instance
 WCHAR szTitle[MAX_LOADSTRING];          // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];    // the main window class name
 
-Program *ptrProgram = new Program();
+Program *ptrProgram { new Program() };
 
 // Pixel Format Descriptor
 static PIXELFORMATDESCRIPTOR pfd
