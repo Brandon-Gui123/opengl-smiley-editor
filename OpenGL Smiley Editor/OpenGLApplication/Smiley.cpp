@@ -99,6 +99,10 @@ bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
     return (openGL_mousePosition - position).getSqrMagnitude() < radius * radius;
 }
 
+void Smiley::OnResize()
+{
+}
+
 void Smiley::Draw()
 {
     Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
@@ -137,12 +141,13 @@ void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wPa
         // if the ctrl key and the left mouse button is held down
         if ((wParam & (MK_CONTROL | MK_LBUTTON)) == ((MK_CONTROL | MK_LBUTTON)))
         {
-            // depending on how far the cursor has travelled, resize the radius of the smiley
-            radius = initialRadiusWhenSelected + openGL_mousePosition.x - cursorPositionWhenSelected.x;
+            // calculate the new radius of the smiley from the adjustment
+            float newRadius{initialRadiusWhenSelected + openGL_mousePosition.x - cursorPositionWhenSelected.x};
 
             // clamp the radius of the smiley to prevent it from becoming too big or too small
-            if      (radius < minRadius) radius = minRadius;
-            else if (radius > maxRadius) radius = maxRadius;
+            if (newRadius < minRadius)      { radius = minRadius; }
+            else if (newRadius > maxRadius) { radius = maxRadius; }
+            else                            { radius = newRadius; OnResize(); }
         }
     }
 }

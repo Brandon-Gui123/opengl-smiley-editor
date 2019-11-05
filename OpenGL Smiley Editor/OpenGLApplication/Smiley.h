@@ -63,8 +63,13 @@ private:
     /// <summary>Returns a boolean based on whether the mouse cursor is inside the smiley.</summary>
     bool IsCursorInside(const Vector2f &openGL_mousePosition);
     
+    ///// Callback Functions (private scope) /////
+
+    /// <summary>Called when the Smiley is resized.</summary>
+    void OnResize();
+
 public:
-    /// Callback Functions ///
+    ///// Callback Functions /////
 
     /// <summary>Callback function that draws the smiley when called.</summary>
     void Draw();
