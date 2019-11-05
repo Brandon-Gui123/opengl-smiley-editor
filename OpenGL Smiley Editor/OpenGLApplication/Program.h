@@ -5,10 +5,21 @@
 
 #include "Vector2f.h"   // for dealing with positions
 #include "framework.h"  // for WPARAM type
+#include "Smiley.h"     // for accessing the Smiley class
+
+#include <vector>       // for std::vector, which stores Smileys
 
 class Program
 {
+private:
+
+    std::vector<Smiley> smileys;
+    int smileyCapacity = 5;
+
 public:
+
+    Program();
+
     void DrawGrayAxes();
 
 public:

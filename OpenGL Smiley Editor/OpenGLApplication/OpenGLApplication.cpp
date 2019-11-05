@@ -241,6 +241,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // convert current mouse coordinates to OpenGL coordinates
             ptrProgram->OnLMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            
             break;
         }
         case WM_RBUTTONDOWN:

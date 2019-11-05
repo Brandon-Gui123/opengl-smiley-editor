@@ -9,12 +9,24 @@
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
 
-Smiley smiley = Smiley(Vector2f(0, 0), 0.25f);
-
 void Program::Draw()
 {
     DrawGrayAxes();
-    smiley.Draw();
+    
+    // draw all smileys
+    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    {
+        smileyIterator->Draw();
+    }
+}
+
+Program::Program()
+{
+    // set the capacity of the smiley vector to be at least the value specified in the variable
+    smileys.reserve(smileyCapacity);
+
+    // initialize one smiley in the program
+    smileys.push_back(Smiley(Vector2f(0.f, 0.f), 0.25f));
 }
 
 void Program::DrawGrayAxes()
@@ -34,12 +46,20 @@ void Program::DrawGrayAxes()
 
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 {
-    smiley.OnMouseMove(openGL_mousePos, wParam);
+    // let all smileys process the mouse movement
+    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    {
+        smileyIterator->OnMouseMove(openGL_mousePos, wParam);
+    }
 }
 
 void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
 {
-    smiley.OnLMouseButtonDown(openGL_mousePos);
+    // let all smileys process the left mouse button down
+    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    {
+        smileyIterator->OnLMouseButtonDown(openGL_mousePos);
+    }
 }
 
 void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
