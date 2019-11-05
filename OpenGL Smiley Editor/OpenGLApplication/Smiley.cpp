@@ -101,17 +101,17 @@ bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
 
 void Smiley::Draw()
 {
-    Color3f color { isSelected ? Color3f(1, 0, 0) : Color3f(0, 0, 1) };
+    Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
 
     // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
     // the face of the smiley
-    DrawFace(position, radius, color);
+    DrawFace(position, radius, smileyColor);
 
     // the eyes of the smiley
-    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f), color);
+    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f), smileyColor);
 
     // the mouth
-    DrawMouth(position, radius * (5.f / 8.f), !isSelected, color);
+    DrawMouth(position, radius * (5.f / 8.f), !isSelected, smileyColor);
 }
 
 void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)

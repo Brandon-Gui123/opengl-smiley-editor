@@ -23,6 +23,9 @@ private:
 
     bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
 
+    Color3f colorWhenUnselected{Color3f(0, 0, 1)};  // The color of the Smiley when it isn't selected.
+    Color3f colorWhenSelected{Color3f(1, 0, 0)};    // The color of the Smiley when it is selected.
+
 public:
     
     /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>
