@@ -18,8 +18,7 @@
 #define EXTRA_HEIGHT 60
 
 // Global Variables:
-int width{400};
-int height{400};
+Vector2f windowSize(400, 400);
 Vector2f mousePosition{};
 GLuint PixelFormat;                     // Type is an OpenGL pre-defined unsigned int. These types ensure cross-platform compatibility.
 HDC hDC = NULL;                         // A handle to the device context
@@ -156,7 +155,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // - WS_SYSMENU:    The window has a window menu on its title bar. This allows users to click on the "X" button on the right to close it.
    // We didn't include a minimize (WS_MINIMIZEBOX) and maximize button (WS_MAXIMIZEBOX) because we don't require it
    // and we also don't want to resize the window.
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, width + EXTRA_WIDTH, height + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, windowSize.x + EXTRA_WIDTH, windowSize.y + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    // set the window title name to my name, as per the requirements
    // L"any string here" is a wchar_t literal
@@ -172,7 +171,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   ReSizeGLScene(width, height);
+   ReSizeGLScene(windowSize.x, windowSize.y);
 
    return TRUE;
 }
@@ -231,7 +230,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // TODO: Optimize so that you don't keep returning a Vector2f (does constantly returning something cause performance problems?)
             // convert the current mouse coordinates to OpenGL coordinates
-            ptrProgram->OnMouseMove(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)), wParam);
+            ptrProgram->OnMouseMove(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize), wParam);
             break;
         }
         case WM_LBUTTONDOWN:
@@ -240,7 +239,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             mousePosition.y = HIWORD(lParam);
 
             // convert current mouse coordinates to OpenGL coordinates
-            ptrProgram->OnLMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            ptrProgram->OnLMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
             
             break;
         }
@@ -250,7 +249,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             mousePosition.y = HIWORD(lParam);
 
             // convert current mouse coordinates to OpenGL coordinates
-            ptrProgram->OnRMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, Vector2f(width, height)));
+            ptrProgram->OnRMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
             break;
         }
         case WM_DESTROY:
