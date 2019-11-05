@@ -65,6 +65,9 @@ public:
 
     /// <summary>Callback function that gets called when the left mouse button is pressed down.</summary>
     void OnLMouseButtonDown(const Vector2f &openGL_mousePosition);
+
+    /// <summary>Callback function that gets called when the mouse is moved.</summary>
+    void OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wParam);
 };
 
 #endif
