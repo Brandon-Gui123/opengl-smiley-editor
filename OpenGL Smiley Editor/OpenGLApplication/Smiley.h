@@ -17,12 +17,16 @@ private:
     float minRadius{20.f / 400.f};
     float maxRadius{400.f / 400.f};
 
-    Smiley(Vector2f position, float radius);
     Vector2f cursorPositionDiff{};              // The position difference between the cursor and the smiley when it is clicked
     float initialRadiusWhenSelected{};          // The radius of the smiley when it is selected
 
     bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
 
+public:
+    
+    /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>
+    Smiley(Vector2f position, float radius);
+    
 private:
 
     // Draws an arc which starts at a specified start angle and ends at a specified end angle.
@@ -56,7 +60,7 @@ private:
 public:
     /// Callback Functions ///
 
-    /// <summary>Callback function that draws the smiley.</summary>
+    /// <summary>Callback function that draws the smiley when called.</summary>
     void Draw();
 };
 
