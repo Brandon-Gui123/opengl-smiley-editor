@@ -105,3 +105,11 @@ void Smiley::Draw()
     // the mouth
     DrawMouth(position, radius * (5.f / 8.f), !isSelected, color);
 }
+
+void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
+{
+    isCursorInside = IsCursorInside(openGL_mousePosition);
+    
+    // the smiley is selected when the mouse cursor is over it during the left-mouse button press
+    isSelected = isCursorInside;
+}

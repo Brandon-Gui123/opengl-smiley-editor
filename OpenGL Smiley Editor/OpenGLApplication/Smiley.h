@@ -62,6 +62,9 @@ public:
 
     /// <summary>Callback function that draws the smiley when called.</summary>
     void Draw();
+
+    /// <summary>Callback function that gets called when the left mouse button is pressed down.</summary>
+    void OnLMouseButtonDown(const Vector2f &openGL_mousePosition);
 };
 
 #endif
