@@ -26,6 +26,12 @@ private:
     Color3f colorWhenUnselected{Color3f(0, 0, 1)};  // The color of the Smiley when it isn't selected.
     Color3f colorWhenSelected{Color3f(1, 0, 0)};    // The color of the Smiley when it is selected.
 
+    Vector2f eyePosition{};  // The coordinates where the eyes are positioned.
+    float eyeRadius{};        // The size of the eyes.
+    float eyeDistanceApart{}; // The distance between the eyes.
+
+    float mouthSize{};        // How wide will the mouth be
+
 public:
     
     /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>

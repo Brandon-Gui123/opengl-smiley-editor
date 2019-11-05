@@ -10,7 +10,13 @@
 #include <cmath>            // for math functions like sin and cos
 
 Smiley::Smiley(Vector2f position, float radius) : position(position), radius(radius)
-{}
+{
+    // calculate values that alter the eyes and mouth, which are relative to the radius of the smiley
+    eyePosition = Vector2f(0, radius * 0.25f);
+    eyeRadius = radius * 0.1875f;
+    eyeDistanceApart = radius * 0.75f;
+    mouthSize = radius * 0.625f;
+}
 
 ///// Drawing Methods /////
 
@@ -101,21 +107,27 @@ bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
 
 void Smiley::OnResize()
 {
+    // recalculate all the vectors and floats that position the eyes and mouth
+    // we place this all here so that we don't have to calculate them on every Draw call
+    // but calculate them every time our smiley changes in size
+    eyePosition.set(0, radius * 0.25f);
+    eyeRadius = radius * 0.1875f;
+    eyeDistanceApart = radius * 0.75f;
+    mouthSize = radius * 0.625f;
 }
 
 void Smiley::Draw()
 {
     Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
 
-    // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
     // the face of the smiley
     DrawFace(position, radius, smileyColor);
 
     // the eyes of the smiley
-    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f), smileyColor);
+    DrawEyes(position + eyePosition, eyeRadius, eyeDistanceApart, smileyColor);
 
     // the mouth
-    DrawMouth(position, radius * (5.f / 8.f), !isSelected, smileyColor);
+    DrawMouth(position, mouthSize, !isSelected, smileyColor);
 }
 
 void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
