@@ -98,8 +98,6 @@ bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
 {
     return (openGL_mousePosition - position).getSqrMagnitude() < radius * radius;
 }
-    }
-}
 
 void Smiley::Draw()
 {
