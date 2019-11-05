@@ -18,6 +18,12 @@ float Vector2f::getSqrMagnitude()
     return x * x + y * y;
 }
 
+void Vector2f::set(float newX, float newY)
+{
+    x = newX;
+    y = newY;
+}
+
 Vector2f operator+(const Vector2f &first, const Vector2f &second)
 {
     return Vector2f(first.x + second.x, first.y + second.y);

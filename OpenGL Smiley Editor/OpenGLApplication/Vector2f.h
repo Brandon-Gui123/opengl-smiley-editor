@@ -28,6 +28,9 @@ public:
     /// </summary>
     float getSqrMagnitude();
 
+    /// <summary>Sets the coordinates in the current Vector2f object to the new ones specified.</summary>
+    void set(float newX, float newY);
+
     /// Operator Overloads ///
     // This operator is overloaded using a member function
     // Because this is a member function, you have access to "this".
