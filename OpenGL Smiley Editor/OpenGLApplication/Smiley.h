@@ -35,13 +35,13 @@ private:
     void DrawCircle(Vector2f position, float radius, Color3f circleColor, int resolution = 20);
 
     /// <summary> Draws the eyes of the smiley at the position, with a specified distance apart.</summary>
-    void DrawEyes(Vector2f position, float eyeRadius, float distanceApart);
+    void DrawEyes(Vector2f position, float eyeRadius, float distanceApart, Color3f eyeColor);
 
     /// <summary>
     /// Draws the mouth of the smiley at the specified position with the specified distance, and whether to
     /// flip it around.
     /// </summary>
-    void DrawMouth(Vector2f position, float radius, bool upsideDown);
+    void DrawMouth(Vector2f position, float radius, bool upsideDown, Color3f mouthColor);
 
     /// <summary>Returns a boolean based on whether the mouse cursor is inside the smiley.</summary>
     bool IsCursorInside(const Vector2f &openGL_mousePosition);

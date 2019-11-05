@@ -62,23 +62,25 @@ void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColor, in
     glEnd();
 }
 
-void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart)
+void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart, Color3f eyeColor)
 {
-    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, Color3f(0, 0, 1));  // left eye
-    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, Color3f(0, 0, 1));  // right eye
+    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor);  // left eye
+    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor);  // right eye
 }
 
-void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown)
+void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown, Color3f mouthColor)
 {
     if (upsideDown)
     {
         // note that drawing the arcs upside down require us to re-position it so that it looks like it is still in the same place
         // since this is the upper part of the circle
-        DrawArc(position - Vector2f(0, radius * 1.5f), radius, 300, 60, Color3f(0, 0, 1));
+        DrawArc(position - Vector2f(0, radius * 1.5f), radius, 300, 60, mouthColor);
     }
     else
     {
-        DrawArc(position, radius, 120, 240, Color3f(0, 0, 1));
+        DrawArc(position, radius, 120, 240, mouthColor);
+    }
+}
 
 bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
 {
@@ -89,19 +91,15 @@ bool Smiley::IsCursorInside(const Vector2f &openGL_mousePosition)
 
 void Smiley::Draw()
 {
+    Color3f color { isSelected ? Color3f(1, 0, 0) : Color3f(0, 0, 1) };
+
     // TODO: Convert all fractions into percentages (0 to 1) and also, make them a variable (private suggested because it is something internal)
     // the face of the smiley
-    DrawCircle(position, radius, Color3f(0, 0, 1));
+    DrawCircle(position, radius, color);
 
     // the eyes of the smiley
-    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f));
-
-    // the smile
-    //DrawArc(position, radius * (5.f / 8.f), 120, 240, Color3f(0, 0, 1));
-
-    // the upside down smile
-    //DrawArc(position - Vector2f(0, radius), radius * (5.f / 8.f), 300, 60, Color3f(0, 0, 1));
+    DrawEyes(position + Vector2f(0, radius * (1.f / 4.f)), radius * (3.f / 16.f), radius * (3.f / 4.f), color);
 
     // the mouth
-    DrawMouth(position, radius * (5.f / 8.f), true);
+    DrawMouth(position, radius * (5.f / 8.f), !isSelected, color);
 }
