@@ -20,8 +20,8 @@ private:
 
     Vector2f cursorPositionWhenSelected{};      // The position of the cursor when it is selected
     float initialRadiusWhenSelected{};           // The radius of the smiley when it is selected
-
     bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
+    bool radiusClamped{false};                  // Whether the radius has been clamped because it is too big or too small.
 
     Color3f colorWhenUnselected{Color3f(0, 0, 1)};  // The color of the Smiley when it isn't selected.
     Color3f colorWhenSelected{Color3f(1, 0, 0)};    // The color of the Smiley when it is selected.

@@ -157,9 +157,32 @@ void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wPa
             float newRadius{initialRadiusWhenSelected + openGL_mousePosition.x - cursorPositionWhenSelected.x};
 
             // clamp the radius of the smiley to prevent it from becoming too big or too small
-            if (newRadius < minRadius)      { radius = minRadius; }
-            else if (newRadius > maxRadius) { radius = maxRadius; }
-            else                            { radius = newRadius; OnResize(); }
+            if (newRadius < minRadius)
+            { 
+                radius = minRadius;
+                
+                // call OnResize if the radius has changed and is now minRadius
+                if (!radiusClamped) OnResize();
+
+                // prevent further calling the OnResize function
+                radiusClamped = true;
+            }
+            else if (newRadius > maxRadius)
+            { 
+                radius = maxRadius;
+
+                // call OnResize if the radius has changed and is now minRadius
+                if (!radiusClamped) OnResize();
+
+                // prevent further calling the OnResize function
+                radiusClamped = true;
+            }
+            else
+            {
+                radius = newRadius;
+                OnResize();
+                radiusClamped = false;
+            }
         }
     }
 }
