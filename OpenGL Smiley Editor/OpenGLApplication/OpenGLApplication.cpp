@@ -8,6 +8,8 @@
 #include "BrandonUtils.h"   // for converting from window coordinates to OpenGL coordinates
 #include "Vector2f.h"       // for mouse position
 
+#include "Windowsx.h"       // for GET_X_L_PARAM and GET_Y_LPARAM
+
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
 
@@ -220,13 +222,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
         case WM_SIZE:
         {
-        ReSizeGLScene(LOWORD(lParam), LOWORD(lParam));
-        break;
+            ReSizeGLScene(LOWORD(lParam), LOWORD(lParam));
+            break;
         }
         case WM_MOUSEMOVE:
         {
-            mousePosition.x = LOWORD(lParam);
-            mousePosition.y = HIWORD(lParam);
+            mousePosition.x = GET_X_LPARAM(lParam);
+            mousePosition.y = GET_Y_LPARAM(lParam);
 
             // TODO: Optimize so that you don't keep returning a Vector2f (does constantly returning something cause performance problems?)
             // convert the current mouse coordinates to OpenGL coordinates
@@ -235,8 +237,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         case WM_LBUTTONDOWN:
         {
-            mousePosition.x = LOWORD(lParam);
-            mousePosition.y = HIWORD(lParam);
+            mousePosition.x = GET_X_LPARAM(lParam);
+            mousePosition.y = GET_Y_LPARAM(lParam);
 
             // convert current mouse coordinates to OpenGL coordinates
             ptrProgram->OnLMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
@@ -245,8 +247,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         case WM_RBUTTONDOWN:
         {
-            mousePosition.x = LOWORD(lParam);
-            mousePosition.y = HIWORD(lParam);
+            mousePosition.x = GET_X_LPARAM(lParam);
+            mousePosition.y = GET_Y_LPARAM(lParam);
 
             // convert current mouse coordinates to OpenGL coordinates
             ptrProgram->OnRMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
