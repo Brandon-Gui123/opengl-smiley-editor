@@ -16,6 +16,14 @@ Smiley::Smiley(Vector2f position, float radius) : position(position), radius(rad
     eyeRadius = radius * 0.1875f;
     eyeDistanceApart = radius * 0.75f;
     mouthSize = radius * 0.625f;
+void Smiley::Select()
+{
+    isSelected = true;
+}
+
+void Smiley::Deselect()
+{
+    isSelected = false;
 }
 
 ///// Drawing Methods /////
@@ -130,7 +138,7 @@ void Smiley::Draw()
     DrawMouth(position, mouthSize, !isSelected, smileyColor);
 }
 
-void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
+bool Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
 {
     isSelected = IsCursorInside(openGL_mousePosition);
     
@@ -144,6 +152,8 @@ void Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
         // this would help prevent incorrect radius scaling due to distance from origin of the OpenGL space
         cursorPositionWhenSelected = openGL_mousePosition;
     }
+
+    return isSelected;
 }
 
 void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wParam)

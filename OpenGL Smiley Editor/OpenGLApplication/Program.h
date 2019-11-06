@@ -13,8 +13,8 @@ class Program
 {
 private:
 
-    int smileyCapacity = 5;
     std::vector<Smiley*> smileyPtrs;
+    int smileyCapacity = 10;
 
 public:
 
