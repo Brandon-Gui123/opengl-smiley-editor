@@ -38,6 +38,9 @@ Program::~Program()
         delete (*smileyPtrIterator);
         (*smileyPtrIterator) = nullptr;
     }
+
+    // clear the vector to remove the null pointers in the vector
+    smileyPtrs.clear();
 }
 
 void Program::DrawGrayAxes()
