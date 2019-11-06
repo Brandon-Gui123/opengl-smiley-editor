@@ -111,9 +111,13 @@ void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
     {
         Smiley *newSmiley = new Smiley(openGL_mousePos, 0.25f);
 
-        // deselect the smiley at the very end of the vector, because elements at the end are drawn on top
-        // of the others
-        smileyPtrs.at(smileyPtrs.size() - 1)->Deselect();
+        // only deselect if we have at least one smiley
+        if (smileyPtrs.size() > 0)
+        {
+            // deselect the smiley at the very end of the vector, because elements at the end are drawn on top
+            // of the others
+            smileyPtrs.at(smileyPtrs.size() - 1)->Deselect();
+        }
 
         // push the new smiley in
         smileyPtrs.push_back(newSmiley);
