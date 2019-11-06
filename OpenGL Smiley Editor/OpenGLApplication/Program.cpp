@@ -131,3 +131,38 @@ void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
         MessageBeep(MB_OK);
     }
 }
+
+void Program::OnDelKeyDown()
+{
+    // deletion permitted if there is at least one Smiley
+    if (smileyPtrs.size() > 0)
+    {
+        // get the Smiley pointer at the end of the vector
+        Smiley *lastSmileyPtr{smileyPtrs.at(smileyPtrs.size() - 1)};
+
+        // check if the last element of the vector of Smileys is selected
+        // because it has to be selected for deletion to occur
+        if (lastSmileyPtr->GetIsSelected())
+        {
+            // free up allocated memory used by the smiley
+            // then set its pointer to nullptr to prevent dangling pointers
+            delete lastSmileyPtr;
+            lastSmileyPtr = nullptr;
+
+            // remove the last element of the vector
+            smileyPtrs.pop_back();
+        }
+        else
+        {
+            // deletion not performed
+            // play default system beep sound
+            MessageBeep(MB_OK);
+        }
+    }
+    else
+    {
+        // deletion not performed
+        // play default system beep sound
+        MessageBeep(MB_OK);
+    }
+}

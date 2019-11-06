@@ -40,6 +40,8 @@ public:
     void Select();
     void Deselect();
 
+    bool GetIsSelected();
+
 private:
 
     // Draws an arc which starts at a specified start angle and ends at a specified end angle.

@@ -41,6 +41,13 @@ public:
 
     /// <summary>Called when the right mouse button is pressed down while the mouse cursor is within the window space.</summary>
     void OnRMouseButtonDown(const Vector2f &openGL_mousePos);
+
+    /// <summary>
+    /// Called when the "Delete" key is pressed down.
+    /// </summary>
+    void OnDelKeyDown();
+
+    ///// Other Functions /////
 };
 
 #endif

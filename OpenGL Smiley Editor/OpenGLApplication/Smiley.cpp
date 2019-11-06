@@ -26,6 +26,11 @@ void Smiley::Deselect()
     isSelected = false;
 }
 
+bool Smiley::GetIsSelected()
+{
+    return isSelected;
+}
+
 ///// Drawing Methods /////
 
 void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution)
