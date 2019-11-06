@@ -13,17 +13,18 @@ class Program
 {
 private:
 
-    std::vector<Smiley> smileys;
     int smileyCapacity = 5;
+    std::vector<Smiley*> smileyPtrs;
 
 public:
 
     Program();
+    ~Program();
 
     void DrawGrayAxes();
 
 public:
-    /// Callback Functions ///
+    ///// Callback Functions /////
 
     /// <summary>Called when the scene is to be drawn.</summary>
     void Draw();

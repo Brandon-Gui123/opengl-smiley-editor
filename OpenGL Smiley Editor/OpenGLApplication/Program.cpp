@@ -14,19 +14,30 @@ void Program::Draw()
     DrawGrayAxes();
     
     // draw all smileys
-    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
-        smileyIterator->Draw();
+        (*smileyPtrIterator)->Draw();
     }
 }
 
 Program::Program()
 {
     // set the capacity of the smiley vector to be at least the value specified in the variable
-    smileys.reserve(smileyCapacity);
+    smileyPtrs.reserve(smileyCapacity);
 
     // initialize one smiley in the program
-    smileys.push_back(Smiley(Vector2f(0.f, 0.f), 0.25f));
+    smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.25f));
+}
+
+Program::~Program()
+{
+    // iterate through the vector of smiley pointers to deallocate memory used by the Smileys
+    // then set its pointer to nullptr to prevent dangling pointers
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    {
+        delete (*smileyPtrIterator);
+        (*smileyPtrIterator) = nullptr;
+    }
 }
 
 void Program::DrawGrayAxes()
@@ -47,18 +58,18 @@ void Program::DrawGrayAxes()
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 {
     // let all smileys process the mouse movement
-    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
-        smileyIterator->OnMouseMove(openGL_mousePos, wParam);
+        (*smileyPtrIterator)->OnMouseMove(openGL_mousePos, wParam);
     }
 }
 
 void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
 {
     // let all smileys process the left mouse button down
-    for (auto smileyIterator{smileys.begin()}; smileyIterator != smileys.end(); smileyIterator++)
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
-        smileyIterator->OnLMouseButtonDown(openGL_mousePos);
+        (*smileyPtrIterator)->OnLMouseButtonDown(openGL_mousePos);
     }
 }
 
