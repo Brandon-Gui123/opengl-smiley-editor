@@ -254,6 +254,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ptrProgram->OnRMouseButtonDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
             break;
         }
+        case WM_KEYDOWN:
+        {
+            switch (wParam)
+            {
+                // delete key
+                case VK_DELETE:
+                    ptrProgram->OnDelKeyDown();
+                    break;
+            }
+
+            break;
+        }
         case WM_DESTROY:
             PostQuitMessage(0);
 

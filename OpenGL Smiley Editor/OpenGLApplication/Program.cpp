@@ -70,11 +70,99 @@ void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
 {
     // let all smileys process the left mouse button down
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    // we will start from the end of the vector to the beginning because
+    // smileys drawn last will be at the very top
+    for (int i{static_cast<int>(smileyPtrs.size()) - 1}; i >= 0; i--)
     {
-        (*smileyPtrIterator)->OnLMouseButtonDown(openGL_mousePos);
+        bool smileyIsSelected = smileyPtrs.at(i)->OnLMouseButtonDown(openGL_mousePos);
+
+        if (smileyIsSelected)
+        {
+            // deselect the Smiley at the end of the vector if it is
+            // not the Smiley we just selected and if the size of the vector is
+            // greater than 1 so we don't deselect the only Smiley we have if it is selected
+            // (for when we only have one Smiley)
+            if (smileyPtrs.size() > 1 && i != smileyPtrs.size() - 1)
+            {
+                smileyPtrs.at(smileyPtrs.size() - 1)->Deselect();
+            }
+
+            // we take note of the selected smiley at the current index
+            Smiley *selectedSmileyPtr{smileyPtrs.at(i)};
+
+            // we shift all elements after the selected smiley down by one space
+            for (int j{i}; j < smileyPtrs.size() - 1; j++)
+            {
+                smileyPtrs[j] = smileyPtrs[j + 1];
+            }
+
+            smileyPtrs[smileyPtrs.size() - 1] = selectedSmileyPtr;
+
+            // exit the loop
+            break;
+        }
     }
+
 }
 
 void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
-{}
+{
+    if (smileyPtrs.size() < smileyPtrs.capacity())
+    {
+        Smiley *newSmiley = new Smiley(openGL_mousePos, 0.25f);
+
+        // only deselect if we have at least one smiley
+        if (smileyPtrs.size() > 0)
+        {
+            // deselect the smiley at the very end of the vector, because elements at the end are drawn on top
+            // of the others
+            smileyPtrs.at(smileyPtrs.size() - 1)->Deselect();
+        }
+
+        // push the new smiley in
+        smileyPtrs.push_back(newSmiley);
+
+        // set the newly-created smiley to be the active one
+        newSmiley->Select();
+    }
+    else
+    {
+        // prohibit adding of smiley and play the default system sound
+        MessageBeep(MB_OK);
+    }
+}
+
+void Program::OnDelKeyDown()
+{
+    // deletion permitted if there is at least one Smiley
+    if (smileyPtrs.size() > 0)
+    {
+        // get the Smiley pointer at the end of the vector
+        Smiley *lastSmileyPtr{smileyPtrs.at(smileyPtrs.size() - 1)};
+
+        // check if the last element of the vector of Smileys is selected
+        // because it has to be selected for deletion to occur
+        if (lastSmileyPtr->GetIsSelected())
+        {
+            // free up allocated memory used by the smiley
+            // then set its pointer to nullptr to prevent dangling pointers
+            delete lastSmileyPtr;
+            lastSmileyPtr = nullptr;
+
+            // remove the last element of the vector
+            smileyPtrs.pop_back();
+        }
+        else
+        {
+            // deletion not performed
+            // play default system beep sound
+            MessageBeep(MB_OK);
+        }
+    }
+    else
+    {
+        // deletion not performed
+        // play default system beep sound
+        MessageBeep(MB_OK);
+    }
+}

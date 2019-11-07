@@ -37,6 +37,11 @@ public:
     /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>
     Smiley(Vector2f position, float radius);
     
+    void Select();
+    void Deselect();
+
+    bool GetIsSelected();
+
 private:
 
     // Draws an arc which starts at a specified start angle and ends at a specified end angle.
@@ -81,7 +86,7 @@ public:
     void Draw();
 
     /// <summary>Callback function that gets called when the left mouse button is pressed down.</summary>
-    void OnLMouseButtonDown(const Vector2f &openGL_mousePosition);
+    bool OnLMouseButtonDown(const Vector2f &openGL_mousePosition);
 
     /// <summary>Callback function that gets called when the mouse is moved.</summary>
     void OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wParam);
