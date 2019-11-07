@@ -19,6 +19,7 @@ private:
     float maxRadius{400.f / 400.f};
 
     Vector2f cursorPositionWhenSelected{};      // The position of the cursor when it is selected
+    Vector2f positionDiffFromCursorAndSmiley{};  // The position difference between the cursor and the Smiley. Prevents Smiley from jumping around during movement
     float initialRadiusWhenSelected{};           // The radius of the smiley when it is selected
     bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
     bool radiusClamped{false};                  // Whether the radius has been clamped because it is too big or too small.

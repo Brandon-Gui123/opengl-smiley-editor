@@ -158,6 +158,9 @@ bool Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
         // keep track of the position of the cursor when the Smiley is clicked
         // this would help prevent incorrect radius scaling due to distance from origin of the OpenGL space
         cursorPositionWhenSelected = openGL_mousePosition;
+
+        // calculate the vector that points from the cursor to the smiley's position
+        positionDiffFromCursorAndSmiley = position - openGL_mousePosition;
     }
 
     return isSelected;
@@ -200,6 +203,13 @@ void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wPa
                 OnResize();
                 radiusClamped = false;
             }
+        }
+        else if (wParam & MK_LBUTTON)
+        {
+            // you can think of this as moving the center of the smiley to the cursor's position
+            // but then moving it again based on the position difference between the cursor's position
+            // and the smiley's position
+            position = openGL_mousePosition + positionDiffFromCursorAndSmiley;
         }
     }
 }
