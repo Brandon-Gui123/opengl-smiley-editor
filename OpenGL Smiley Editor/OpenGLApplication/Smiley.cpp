@@ -16,6 +16,8 @@ Smiley::Smiley(Vector2f position, float radius) : position(position), radius(rad
     eyeRadius = radius * 0.1875f;
     eyeDistanceApart = radius * 0.75f;
     mouthSize = radius * 0.625f;
+}
+
 void Smiley::Select()
 {
     isSelected = true;
