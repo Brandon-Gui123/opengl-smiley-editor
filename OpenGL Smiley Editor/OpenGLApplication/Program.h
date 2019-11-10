@@ -51,6 +51,12 @@ public:
     /// Called when the "Ctrl" key is pressed down.
     /// </summary>
     void OnCtrlKeyDown(const Vector2f &openGL_mousePosition);
+
+    /// <summary>
+    /// Called when the "Ctrl" key is released.
+    /// </summary>
+    void OnCtrlKeyUp(const Vector2f &openGL_mousePosition);
+
     ///// Other Functions /////
 };
 

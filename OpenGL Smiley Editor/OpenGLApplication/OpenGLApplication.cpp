@@ -271,6 +271,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             break;
         }
+        case WM_KEYUP:
+        {
+            switch (wParam)
+            {
+                // ctrl key
+                case VK_CONTROL:
+                    ptrProgram->OnCtrlKeyUp(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
+                    break;
+            }
+
+            break;
+        }
         case WM_DESTROY:
             PostQuitMessage(0);
 

@@ -174,3 +174,11 @@ void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
         (*smileyPtrIterator)->OnCtrlKeyDown(openGL_mousePosition);
     }
 }
+
+void Program::OnCtrlKeyUp(const Vector2f & openGL_mousePosition)
+{
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    {
+        (*smileyPtrIterator)->OnCtrlKeyUp(openGL_mousePosition);
+    }
+}
