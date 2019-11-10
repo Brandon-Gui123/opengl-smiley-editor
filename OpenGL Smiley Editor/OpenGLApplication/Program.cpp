@@ -72,7 +72,7 @@ void Program::SaveSmileysToFile()
 
     // opens a file called "smileys.txt"
     // will write to the file, replacing all of its contents with new ones
-    smileyFile.open("smileys.txt", std::ios::in | std::ios::trunc);
+    smileyFile.open("smileys.txt", std::ios::out | std::ios::trunc);
 
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
