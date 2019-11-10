@@ -92,6 +92,9 @@ void Program::SaveSmileysToFile()
         // separator
         smileyFile << "******" << '\n';
     }
+
+    // tell the OS that we're done with the file
+    smileyFile.close();
 }
 
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
