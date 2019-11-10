@@ -223,3 +223,20 @@ void Smiley::OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wPa
         }
     }
 }
+
+void Smiley::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
+{
+    if (isSelected)
+    {
+        // keep track of the current radius of the smiley during the mouse click so we can resize it properly
+        // when the user holds down the ctrl key moves the mouse
+        initialRadiusWhenSelected = radius;
+
+        // keep track of the position of the cursor when the Smiley is clicked
+        // this would help prevent incorrect radius scaling due to distance from origin of the OpenGL space
+        cursorPositionWhenSelected = openGL_mousePosition;
+
+        // calculate the vector that points from the cursor to the smiley's position
+        positionDiffFromCursorAndSmiley = position - openGL_mousePosition;
+    }
+}

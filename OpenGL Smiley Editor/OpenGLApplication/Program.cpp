@@ -166,3 +166,11 @@ void Program::OnDelKeyDown()
         MessageBeep(MB_OK);
     }
 }
+
+void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
+{
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    {
+        (*smileyPtrIterator)->OnCtrlKeyDown(openGL_mousePosition);
+    }
+}

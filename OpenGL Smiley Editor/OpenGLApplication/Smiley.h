@@ -94,6 +94,10 @@ public:
 
     /// <summary>Callback function that gets called when the mouse is moved.</summary>
     void OnMouseMove(const Vector2f &openGL_mousePosition, const WPARAM &wParam);
+
+    /// <summary>Callback function that gets called when the control key is pressed down.</summary>
+    void OnCtrlKeyDown(const Vector2f &openGL_mousePosition);
+
 };
 
 #endif
