@@ -289,12 +289,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
         }
         case WM_DESTROY:
-            PostQuitMessage(0);
+
+            // save all smileys to a text file
+            ptrProgram->SaveSmileysToFile();
 
             // deallocate memory occupied by the Program instance
             // then set its pointer to nullptr to prevent dangling pointers
             delete ptrProgram; ptrProgram = nullptr;
 
+            PostQuitMessage(0);
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

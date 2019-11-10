@@ -13,6 +13,8 @@
 
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
+#include <fstream>  // for reading and writing to files
+#include <ios>      // for determing the modes used when writing or reading files
 
 void Program::Draw()
 {
@@ -61,6 +63,35 @@ void Program::DrawGrayAxes()
         glVertex2f(0, 0);
         glVertex2f(0, 1);
     glEnd();
+}
+
+void Program::SaveSmileysToFile()
+{
+    // ofstream is an output stream that can be written to a file (output to a file, hence, it starts with the letter "o")
+    std::ofstream smilesFile;
+
+    // opens a file called "smileys.txt"
+    // will write to the file, replacing all of its contents with new ones
+    smilesFile.open("smileys.txt", std::ios::in | std::ios::trunc);
+
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    {
+        // obtain the radius of the smiley to calculate top-left corner coordinate
+        float smileyRadius{(*smileyPtrIterator)->GetRadius()};
+
+        // calculate the window coordinates for the top-left corner of the Smiley
+        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() - Vector2f(smileyRadius, smileyRadius), Vector2f(400, 400))};
+
+        // write coordinates to file
+        smilesFile << topLeft.x << '\n';    // x-coordinate
+        smilesFile << topLeft.y << '\n';    // y-coordinate
+
+        // write radius value (in window coordinates) to file
+        smilesFile << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
+
+        // separator
+        smilesFile << "******" << '\n';
+    }
 }
 
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
