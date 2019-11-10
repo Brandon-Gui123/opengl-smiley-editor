@@ -33,6 +33,16 @@ bool Smiley::GetIsSelected()
     return isSelected;
 }
 
+Vector2f Smiley::GetPosition()
+{
+    return position;
+}
+
+float Smiley::GetRadius()
+{
+    return radius;
+}
+
 ///// Drawing Methods /////
 
 void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution)
