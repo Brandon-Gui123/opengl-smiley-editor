@@ -151,7 +151,7 @@ void Program::SaveSmileysToFile()
         float smileyRadius{(*smileyPtrIterator)->GetRadius()};
 
         // calculate the window coordinates for the top-left corner of the Smiley
-        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() - Vector2f(smileyRadius, smileyRadius), Vector2f(400, 400))};
+        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f(-smileyRadius, smileyRadius), Vector2f(400, 400))};
 
         // write coordinates to file
         smileyFile << topLeft.x << '\n';    // x-coordinate
