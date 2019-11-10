@@ -68,11 +68,11 @@ void Program::DrawGrayAxes()
 void Program::SaveSmileysToFile()
 {
     // ofstream is an output stream that can be written to a file (output to a file, hence, it starts with the letter "o")
-    std::ofstream smilesFile;
+    std::ofstream smileyFile;
 
     // opens a file called "smileys.txt"
     // will write to the file, replacing all of its contents with new ones
-    smilesFile.open("smileys.txt", std::ios::in | std::ios::trunc);
+    smileyFile.open("smileys.txt", std::ios::in | std::ios::trunc);
 
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
@@ -83,14 +83,14 @@ void Program::SaveSmileysToFile()
         Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() - Vector2f(smileyRadius, smileyRadius), Vector2f(400, 400))};
 
         // write coordinates to file
-        smilesFile << topLeft.x << '\n';    // x-coordinate
-        smilesFile << topLeft.y << '\n';    // y-coordinate
+        smileyFile << topLeft.x << '\n';    // x-coordinate
+        smileyFile << topLeft.y << '\n';    // y-coordinate
 
         // write radius value (in window coordinates) to file
-        smilesFile << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
+        smileyFile << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
 
         // separator
-        smilesFile << "******" << '\n';
+        smileyFile << "******" << '\n';
     }
 }
 
