@@ -13,11 +13,14 @@
 
 #include <gl/GL.h>  // OpenGL 32-bit library
 #include <gl/GLU.h> // GLU 32-bit library
+#include <fstream>  // for reading and writing to files
+#include <ios>      // for determing the modes used when writing or reading files
+#include <string>   // for std::string
 
 void Program::Draw()
 {
     DrawGrayAxes();
-    
+
     // draw all smileys
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
@@ -30,8 +33,15 @@ Program::Program()
     // set the capacity of the smiley vector to be at least the value specified in the variable
     smileyPtrs.reserve(smileyCapacity);
 
-    // initialize one smiley in the program
-    smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.25f));
+    // read smileys from file
+    LoadSmileysFromFile();
+
+    // initialize one smiley in the program if there are none loaded
+    if (smileyPtrs.size() <= 0)
+    {
+        // provide a Smiley if there's nothing in the file
+        smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.25f));
+    }
 }
 
 Program::~Program()
@@ -61,6 +71,101 @@ void Program::DrawGrayAxes()
         glVertex2f(0, 0);
         glVertex2f(0, 1);
     glEnd();
+}
+
+void Program::LoadSmileysFromFile()
+{
+    // ifstream is an input stream that can be read from a file (input from a file, hence, it starts with the letter "i")
+    std::ifstream smileyFile_inputStream;
+
+    // open the file
+    // will read from file (std::ios::in)
+    smileyFile_inputStream.open("smileys.txt", std::ios::in);
+
+    if (smileyFile_inputStream.is_open())
+    {
+        // TODO: Find and implement a better way to do this, instead of using switch and case
+
+        // how we will intepret the current line of data we receieved from the file
+        // we use an integer looping from 0 to 3 which acts like a "mode" for what to do with the data receieved
+        int dataInterpretation{0};
+        std::string currentLine{};
+        
+        // for keeping track of values
+        float smileyPosX_window{};
+        float smileyPosY_window{};
+        float smileyRadius_window{};
+
+        while (std::getline(smileyFile_inputStream, currentLine))
+        {
+            switch (dataInterpretation)
+            {
+                case 0: // left coordinate value
+                    smileyPosX_window = std::stof(currentLine);    // converts string to float
+                    break;
+
+                case 1: // top coordinate value
+                    smileyPosY_window = std::stof(currentLine);
+                    break;
+
+                case 2: // radius of the smiley
+                    smileyRadius_window = std::stof(currentLine);
+                    break;
+
+                case 3: // separator
+                    // method returns 0 if both strings are equal
+                    if (currentLine.compare("******") == 0)
+                    {
+                        // convert values to OpenGL
+                        Vector2f smileyPos_openGL{BrandonUtils::winCoordsToOpenGL(Vector2f(smileyPosX_window, smileyPosY_window), Vector2f(400, 400))};
+                        float smileyRadius_openGL{BrandonUtils::map(smileyRadius_window, 0, 400, -1, 1)};
+
+                        // constructs a new Smiley, then push it into the vector
+                        // add radius back to the position because the position is for top-left corner
+                        smileyPtrs.push_back(new Smiley(smileyPos_openGL + Vector2f(smileyRadius_openGL, -smileyRadius_openGL), smileyRadius_openGL));
+                    }
+                    break;
+            }
+
+            // prevent the value from going over 4
+            dataInterpretation = (dataInterpretation + 1) % 4;
+        }
+    }
+
+    // notify the OS that we are done with the file
+    smileyFile_inputStream.close();
+}
+
+void Program::SaveSmileysToFile()
+{
+    // ofstream is an output stream that can be written to a file (output to a file, hence, it starts with the letter "o")
+    std::ofstream smileyFile_outputStream;
+
+    // opens a file called "smileys.txt"
+    // will write to the file (std::ios::out), replacing all of its contents with new ones (std::ios::trunc)
+    smileyFile_outputStream.open("smileys.txt", std::ios::out | std::ios::trunc);
+
+    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    {
+        // obtain the radius of the smiley to calculate top-left corner coordinate
+        float smileyRadius{(*smileyPtrIterator)->GetRadius()};
+
+        // calculate the window coordinates for the top-left corner of the Smiley
+        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f(-smileyRadius, smileyRadius), Vector2f(400, 400))};
+
+        // write coordinates to file
+        smileyFile_outputStream << topLeft.x << '\n';    // x-coordinate
+        smileyFile_outputStream << topLeft.y << '\n';    // y-coordinate
+
+        // write radius value (in window coordinates) to file
+        smileyFile_outputStream << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
+
+        // separator
+        smileyFile_outputStream << "******" << '\n';
+    }
+
+    // tell the OS that we're done with the file
+    smileyFile_outputStream.close();
 }
 
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)

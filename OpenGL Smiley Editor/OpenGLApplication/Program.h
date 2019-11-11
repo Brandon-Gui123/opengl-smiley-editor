@@ -28,6 +28,9 @@ public:
 
     void DrawGrayAxes();
 
+    void LoadSmileysFromFile();
+    void SaveSmileysToFile();
+
 public:
     ///// Callback Functions /////
 
