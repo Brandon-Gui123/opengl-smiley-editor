@@ -76,13 +76,13 @@ void Program::DrawGrayAxes()
 void Program::LoadSmileysFromFile()
 {
     // ifstream is an input stream that can be read from a file (input from a file, hence, it starts with the letter "i")
-    std::ifstream smileyFile;
+    std::ifstream smileyFile_inputStream;
 
     // open the file
     // will read from file (std::ios::in)
-    smileyFile.open("smileys.txt", std::ios::in);
+    smileyFile_inputStream.open("smileys.txt", std::ios::in);
 
-    if (smileyFile.is_open())
+    if (smileyFile_inputStream.is_open())
     {
         // TODO: Find and implement a better way to do this, instead of using switch and case
 
@@ -96,7 +96,7 @@ void Program::LoadSmileysFromFile()
         float smileyPosY_window{};
         float smileyRadius_window{};
 
-        while (std::getline(smileyFile, currentLine))
+        while (std::getline(smileyFile_inputStream, currentLine))
         {
             switch (dataInterpretation)
             {
@@ -133,17 +133,17 @@ void Program::LoadSmileysFromFile()
     }
 
     // notify the OS that we are done with the file
-    smileyFile.close();
+    smileyFile_inputStream.close();
 }
 
 void Program::SaveSmileysToFile()
 {
     // ofstream is an output stream that can be written to a file (output to a file, hence, it starts with the letter "o")
-    std::ofstream smileyFile;
+    std::ofstream smileyFile_outputStream;
 
     // opens a file called "smileys.txt"
     // will write to the file (std::ios::out), replacing all of its contents with new ones (std::ios::trunc)
-    smileyFile.open("smileys.txt", std::ios::out | std::ios::trunc);
+    smileyFile_outputStream.open("smileys.txt", std::ios::out | std::ios::trunc);
 
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
@@ -154,18 +154,18 @@ void Program::SaveSmileysToFile()
         Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f(-smileyRadius, smileyRadius), Vector2f(400, 400))};
 
         // write coordinates to file
-        smileyFile << topLeft.x << '\n';    // x-coordinate
-        smileyFile << topLeft.y << '\n';    // y-coordinate
+        smileyFile_outputStream << topLeft.x << '\n';    // x-coordinate
+        smileyFile_outputStream << topLeft.y << '\n';    // y-coordinate
 
         // write radius value (in window coordinates) to file
-        smileyFile << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
+        smileyFile_outputStream << BrandonUtils::map(smileyRadius, -1, 1, 0, 400) << '\n'; // radius
 
         // separator
-        smileyFile << "******" << '\n';
+        smileyFile_outputStream << "******" << '\n';
     }
 
     // tell the OS that we're done with the file
-    smileyFile.close();
+    smileyFile_outputStream.close();
 }
 
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
