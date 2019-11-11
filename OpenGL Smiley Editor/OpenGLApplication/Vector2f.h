@@ -25,13 +25,13 @@ public:
     Vector2f(float x, float y);
     
     /// <summary>Gets the length of this vector.</summary>
-    float getMagnitude();
+    float getMagnitude() const;
 
     /// <summary>
     /// Gets the square of the length of this vector. 
     /// Use this if you're just comparing distances since this is faster due to the lack of the square root function.
     /// </summary>
-    float getSqrMagnitude();
+    float getSqrMagnitude() const;
 
     /// <summary>Sets the coordinates in the current Vector2f object to the new ones specified.</summary>
     void set(float newX, float newY);

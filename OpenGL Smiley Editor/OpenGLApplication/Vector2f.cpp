@@ -13,12 +13,12 @@ Vector2f::Vector2f() : x(0.f), y(0.f)
 Vector2f::Vector2f(float x, float y) : x(x), y(y)
 {}
 
-float Vector2f::getMagnitude()
+float Vector2f::getMagnitude() const
 {
     return sqrtf(x * x + y * y);
 }
 
-float Vector2f::getSqrMagnitude()
+float Vector2f::getSqrMagnitude() const
 {
     return x * x + y * y;
 }
