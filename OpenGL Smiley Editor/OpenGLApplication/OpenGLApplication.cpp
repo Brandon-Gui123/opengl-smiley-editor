@@ -258,9 +258,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             switch (wParam)
             {
+                // ctrl key
+                case VK_CONTROL:
+                    ptrProgram->OnCtrlKeyDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
+                    break;
+
                 // delete key
                 case VK_DELETE:
                     ptrProgram->OnDelKeyDown();
+                    break;
+            }
+
+            break;
+        }
+        case WM_KEYUP:
+        {
+            switch (wParam)
+            {
+                // ctrl key
+                case VK_CONTROL:
+                    ptrProgram->OnCtrlKeyUp(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
                     break;
             }
 
