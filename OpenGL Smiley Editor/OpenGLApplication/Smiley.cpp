@@ -1,3 +1,8 @@
+/**
+ * IGRA Assignment 1: Smiley Editor
+ * Completed by Brandon Gui (1828865) from DIT/FT/2B05.
+ */
+
 #include "Smiley.h"
 
 #include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)

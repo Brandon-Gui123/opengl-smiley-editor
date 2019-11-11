@@ -1,3 +1,8 @@
+/**
+ * IGRA Assignment 1: Smiley Editor
+ * Completed by Brandon Gui (1828865) from DIT/FT/2B05.
+ */
+
 #include "Vector2f.h"
 
 #include <cmath>    // for sqrtf, which finds the square root of a float
