@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="BrandonUtils.h" />
     <ClInclude Include="Color3f.h" />
+    <ClInclude Include="Color4f.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="OpenGLApplication.h" />
     <ClInclude Include="Program.h" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="BrandonUtils.cpp" />
     <ClCompile Include="Color3f.cpp" />
+    <ClCompile Include="Color4f.cpp" />
     <ClCompile Include="OpenGLApplication.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Smiley.cpp" />
