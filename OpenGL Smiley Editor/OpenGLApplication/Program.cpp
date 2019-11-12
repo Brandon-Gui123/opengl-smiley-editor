@@ -44,6 +44,9 @@ Program::Program()
         // provide a Smiley if there's nothing in the file
         smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.125f));
     }
+
+    // gets a handle to the cursor
+    hCursor = GetCursor();
 }
 
 Program::~Program()
