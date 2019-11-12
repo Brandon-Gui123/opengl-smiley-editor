@@ -10,6 +10,7 @@
 
 #include "Vector2f.h"   // for positions
 #include "Color3f.h"    // for colour values
+#include "Color4f.h"    // for colour values, but with transparency support as well
 
 #include "framework.h"  // for WPARAM
 
@@ -67,13 +68,13 @@ private:
     /// Draws a circle at the specified position with a given radius and circle colour.
     /// The resolution of the circle changes how round the circle will appear.
     /// </summary>
-    void DrawCircle(const Vector2f &position, float radius, const Color3f &circleColor, bool colorOutline, int resolution = 64) const;
+    void DrawCircle(const Vector2f &position, float radius, const Color4f &circleColor, bool colorOutline, int resolution = 64) const;
 
     /// <summary> Draws the face of the smiley.</summary>
-    void DrawFace(const Vector2f &position, float radius, const Color3f &faceOutlineColor, int resolution = 64) const;
+    void DrawFace(const Vector2f &position, float radius, const Color4f &faceOutlineColor, int resolution = 64) const;
 
     /// <summary> Draws the eyes of the smiley at the position, with a specified distance apart.</summary>
-    void DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color3f &eyeColor) const;
+    void DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color4f &eyeColor) const;
 
     /// <summary>
     /// Draws the mouth of the smiley at the specified position with the specified distance, and whether to
