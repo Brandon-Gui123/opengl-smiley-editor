@@ -42,7 +42,7 @@ private:
 public:
     
     /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>
-    Smiley(Vector2f position, float radius);
+    Smiley(const Vector2f &position, float radius);
     
     void Select();
     void Deselect();
@@ -61,25 +61,25 @@ private:
     // endAngle - the angle to end the arc
     // arcColour - the colour of the arc
     // resolution - determines the accuracy of the arc. Higher resolution results in rounder arcs
-    void DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution = 32) const;
+    void DrawArc(const Vector2f &position, float radius, float startAngle, float endAngle, const Color3f &arcColor, int resolution = 32) const;
 
     /// <summary>
     /// Draws a circle at the specified position with a given radius and circle colour.
     /// The resolution of the circle changes how round the circle will appear.
     /// </summary>
-    void DrawCircle(Vector2f position, float radius, Color3f circleColor, bool colorOutline, int resolution = 64) const;
+    void DrawCircle(const Vector2f &position, float radius, const Color3f &circleColor, bool colorOutline, int resolution = 64) const;
 
     /// <summary> Draws the face of the smiley.</summary>
-    void DrawFace(Vector2f position, float radius, Color3f faceOutlineColor, int resolution = 64) const;
+    void DrawFace(const Vector2f &position, float radius, const Color3f &faceOutlineColor, int resolution = 64) const;
 
     /// <summary> Draws the eyes of the smiley at the position, with a specified distance apart.</summary>
-    void DrawEyes(Vector2f position, float eyeRadius, float distanceApart, Color3f eyeColor) const;
+    void DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color3f &eyeColor) const;
 
     /// <summary>
     /// Draws the mouth of the smiley at the specified position with the specified distance, and whether to
     /// flip it around.
     /// </summary>
-    void DrawMouth(Vector2f position, float radius, bool upsideDown, Color3f mouthColor) const;
+    void DrawMouth(const Vector2f &position, float radius, bool upsideDown, const Color3f &mouthColor) const;
 
     /// <summary>Returns a boolean based on whether the mouse cursor is inside the smiley.</summary>
     bool IsCursorInside(const Vector2f &openGL_mousePosition) const;

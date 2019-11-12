@@ -16,7 +16,7 @@
 #include <gl/GLU.h>         // GLU 32-bit library
 #include <cmath>            // for math functions like sin and cos
 
-Smiley::Smiley(Vector2f position, float radius) : position(position), radius(radius)
+Smiley::Smiley(const Vector2f &position, float radius) : position(position), radius(radius)
 {
     // calculate values that alter the eyes and mouth, which are relative to the radius of the smiley
     eyePosition = Vector2f(0, radius * 0.25f);
@@ -52,7 +52,7 @@ float Smiley::GetRadius() const
 
 ///// Drawing Methods /////
 
-void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float endAngle, Color3f arcColor, int resolution) const
+void Smiley::DrawArc(const Vector2f &position, float radius, float startAngle, float endAngle, const Color3f &arcColor, int resolution) const
 {
     // we will be placing a new vertex at every "step"
     float step{360.f / resolution};
@@ -84,7 +84,7 @@ void Smiley::DrawArc(Vector2f position, float radius, float startAngle, float en
     glEnd();
 }
 
-void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColour, bool colorOutline, int resolution) const
+void Smiley::DrawCircle(const Vector2f &position, float radius, const Color3f &circleColour, bool colorOutline, int resolution) const
 {
     // a new vertex will be placed at every "step"
     float step{360.f / resolution};
@@ -103,7 +103,7 @@ void Smiley::DrawCircle(Vector2f position, float radius, Color3f circleColour, b
     glEnd();
 }
 
-void Smiley::DrawFace(Vector2f position, float radius, Color3f faceOutlineColor, int resolution) const
+void Smiley::DrawFace(const Vector2f &position, float radius, const Color3f &faceOutlineColor, int resolution) const
 {
     // draws a circle filled with white colour acting as the base
     DrawCircle(position, radius, Color3f(1.f, 1.f, 1.f), false, resolution);
@@ -112,13 +112,13 @@ void Smiley::DrawFace(Vector2f position, float radius, Color3f faceOutlineColor,
     DrawCircle(position, radius, faceOutlineColor, true, resolution);
 }
 
-void Smiley::DrawEyes(Vector2f position, float eyeRadius, float distanceApart, Color3f eyeColor) const
+void Smiley::DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color3f &eyeColor) const
 {
     DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // left eye
     DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // right eye
 }
 
-void Smiley::DrawMouth(Vector2f position, float radius, bool upsideDown, Color3f mouthColor) const
+void Smiley::DrawMouth(const Vector2f &position, float radius, bool upsideDown, const Color3f &mouthColor) const
 {
     if (upsideDown)
     {

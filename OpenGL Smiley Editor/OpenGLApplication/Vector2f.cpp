@@ -54,14 +54,14 @@ Vector2f operator/(const Vector2f & vector, float divider)
     return Vector2f(vector.x / divider, vector.y / divider);
 }
 
-Vector2f Vector2f::operator+=(Vector2f addend)
+Vector2f Vector2f::operator+=(const Vector2f &addend)
 {
     this->x += addend.x;
     this->y += addend.y;
     return Vector2f(this->x, this->y);
 }
 
-Vector2f Vector2f::operator-=(Vector2f minuend)
+Vector2f Vector2f::operator-=(const Vector2f &minuend)
 {
     this->x -= minuend.x;
     this->y -= minuend.y;
