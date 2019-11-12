@@ -5,10 +5,12 @@
 
 #include "Smiley.h"
 
-#include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
+#include "Color3f.h"        // for colours
 #include "BrandonUtils.h"   // for converting from degrees to radians
 #include "Vector2f.h"       // for positions
-#include "Color3f.h"        // for colours
+
+#include "framework.h"      // include file for standard system include files or project specific include files
+                            // which also includes the necessary files for drawing OpenGL shapes
 
 #include <gl/GL.h>          // OpenGL 32-bit library
 #include <gl/GLU.h>         // GLU 32-bit library

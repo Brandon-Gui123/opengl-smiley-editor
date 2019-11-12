@@ -4,6 +4,7 @@
  */
 
 #include "BrandonUtils.h"
+
 #include "UserDefinedConstants.h"   // for constants that I have defined, like epsilon
 
 #define _USE_MATH_DEFINES           // for using mathematical constants defined in the math library. 

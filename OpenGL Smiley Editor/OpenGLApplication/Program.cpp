@@ -5,11 +5,12 @@
 
 #include "Program.h"
 
-#include "Vector2f.h"       // for storing positions
 #include "BrandonUtils.h"   // for utilizing useful functions that I have defined
 #include "Smiley.h"         // everything related to Smileys
+#include "Vector2f.h"       // for storing positions
 
-#include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
+#include "framework.h"      // include file for standard system include files or project specific include files
+                            // which also includes the necessary files for drawing OpenGL shapes
 
 #include <vector>           // for using vector methods
 #include <gl/GL.h>          // OpenGL 32-bit library

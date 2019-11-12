@@ -8,11 +8,12 @@
 
 #include "OpenGLApplication.h"
 
-#include "Program.h"            // custom class to abstract all these
 #include "BrandonUtils.h"       // for converting from window coordinates to OpenGL coordinates
+#include "Program.h"            // custom class to abstract all these
 #include "Vector2f.h"           // for mouse position
 
-#include "framework.h"          // to access API for drawing stuff
+#include "framework.h"          // include file for standard system include files or project specific include files
+                                // which also includes the necessary files for drawing OpenGL shapes
 #include "Windowsx.h"           // for GET_X_L_PARAM and GET_Y_LPARAM
 
 #include <gl/GL.h>              // OpenGL 32-bit library
