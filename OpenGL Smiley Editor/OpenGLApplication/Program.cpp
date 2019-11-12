@@ -217,7 +217,7 @@ void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
 
 }
 
-void Program::OnRMouseButtonDown(const Vector2f & openGL_mousePos)
+void Program::OnRMouseButtonDown(const Vector2f &openGL_mousePos)
 {
     if (smileyPtrs.size() < smileyPtrs.capacity())
     {
@@ -287,7 +287,7 @@ void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
     }
 }
 
-void Program::OnCtrlKeyUp(const Vector2f & openGL_mousePosition)
+void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 {
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {

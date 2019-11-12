@@ -245,7 +245,7 @@ void Smiley::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
     }
 }
 
-void Smiley::OnCtrlKeyUp(const Vector2f & openGL_mousePosition)
+void Smiley::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 {
     if (isSelected)
     {
