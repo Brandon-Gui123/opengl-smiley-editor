@@ -21,6 +21,10 @@
 
 void Program::Draw()
 {
+    glEnable(GL_BLEND);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     DrawGrayAxes();
 
     // draw all smileys
@@ -28,6 +32,8 @@ void Program::Draw()
     {
         (*smileyPtrIterator)->Draw();
     }
+
+    glDisable(GL_BLEND);
 }
 
 Program::Program()
