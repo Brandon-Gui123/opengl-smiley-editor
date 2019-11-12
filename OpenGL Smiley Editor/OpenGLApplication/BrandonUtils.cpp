@@ -4,12 +4,12 @@
  */
 
 #include "BrandonUtils.h"
+#include "UserDefinedConstants.h"   // for constants that I have defined, like epsilon
 
-// for user-defined consants, like the epsilon
-#include "UserDefinedConstants.h"
+#define _USE_MATH_DEFINES           // for using mathematical constants defined in the math library. 
+                                   // This has to be defined before including the cmath library.
 
-#define _USE_MATH_DEFINES   // for using mathematical constants defined in the math library
-#include <cmath>            // for mathematical functions like sin, cos and fabs
+#include <cmath>                   // for mathematical functions like sin, cos and fabs
 
 float BrandonUtils::map(float current, float oldMin, float oldMax, float newMin, float newMax)
 {

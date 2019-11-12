@@ -6,17 +6,17 @@
 // OpenGLApplication.cpp : Defines the entry point for the application.
 //
 
-#include "framework.h"
 #include "OpenGLApplication.h"
 
-#include "Program.h"        // custom class to abstract all these
-#include "BrandonUtils.h"   // for converting from window coordinates to OpenGL coordinates
-#include "Vector2f.h"       // for mouse position
+#include "Program.h"            // custom class to abstract all these
+#include "BrandonUtils.h"       // for converting from window coordinates to OpenGL coordinates
+#include "Vector2f.h"           // for mouse position
 
-#include "Windowsx.h"       // for GET_X_L_PARAM and GET_Y_LPARAM
+#include "framework.h"          // to access API for drawing stuff
+#include "Windowsx.h"           // for GET_X_L_PARAM and GET_Y_LPARAM
 
-#include <gl/GL.h>  // OpenGL 32-bit library
-#include <gl/GLU.h> // GLU 32-bit library
+#include <gl/GL.h>              // OpenGL 32-bit library
+#include <gl/GLU.h>             // GLU 32-bit library
 
 #define MAX_LOADSTRING 100
 
@@ -111,8 +111,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     return (int) msg.wParam;
 }
-
-
 
 //
 //  FUNCTION: MyRegisterClass()
@@ -295,7 +293,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // deallocate memory occupied by the Program instance
             // then set its pointer to nullptr to prevent dangling pointers
-            delete ptrProgram; ptrProgram = nullptr;
+            delete ptrProgram;
+            ptrProgram = nullptr;
 
             PostQuitMessage(0);
             break;

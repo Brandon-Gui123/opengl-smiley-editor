@@ -8,7 +8,7 @@
 #ifndef BRANDON_UTILS_H
 #define BRANDON_UTILS_H
 
-#include "Vector2f.h"
+#include "Vector2f.h"   // for storing coordinates
 
 /// <summary>
 /// A namespace containing commonly-used functionality in this program, such as converting from
@@ -36,10 +36,10 @@ namespace BrandonUtils
     /// </summary>
     Vector2f openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize);
 
-    /// <summary>Converts the specified degree value to radians</summary>
+    /// <summary>Converts the specified degree value to radians.</summary>
     float degToRad(float degrees);
 
-    /// <summary>Converts the specified radian value to degrees</summary>
+    /// <summary>Converts the specified radian value to degrees.</summary>
     float radToDeg(float radians);
 }
 

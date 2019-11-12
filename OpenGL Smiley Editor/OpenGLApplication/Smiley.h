@@ -8,9 +8,10 @@
 #ifndef SMILEY_H
 #define SMILEY_H
 
-#include "framework.h"  // for WPARAM
 #include "Vector2f.h"   // for positions
 #include "Color3f.h"    // for colour values
+
+#include "framework.h"  // for WPARAM
 
 class Smiley
 {

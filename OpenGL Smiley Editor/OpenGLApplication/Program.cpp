@@ -5,17 +5,18 @@
 
 #include "Program.h"
 
-#include "framework.h"  // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
+#include "Vector2f.h"       // for storing positions
+#include "BrandonUtils.h"   // for utilizing useful functions that I have defined
+#include "Smiley.h"         // everything related to Smileys
 
-#include "Vector2f.h"
-#include "BrandonUtils.h"
-#include "Smiley.h"
+#include "framework.h"      // for including Windows API to draw in the window (methods like glBegin, glEnd, glVertex2f)
 
-#include <gl/GL.h>  // OpenGL 32-bit library
-#include <gl/GLU.h> // GLU 32-bit library
-#include <fstream>  // for reading and writing to files
-#include <ios>      // for determing the modes used when writing or reading files
-#include <string>   // for std::string
+#include <vector>           // for using vector methods
+#include <gl/GL.h>          // OpenGL 32-bit library
+#include <gl/GLU.h>         // GLU 32-bit library
+#include <fstream>          // for reading and writing to files
+#include <ios>              // for determing the modes used when writing or reading files
+#include <string>           // for std::string
 
 void Program::Draw()
 {

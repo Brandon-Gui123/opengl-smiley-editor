@@ -9,11 +9,14 @@
 #define PROGRAM_H
 
 #include "Vector2f.h"   // for dealing with positions
-#include "framework.h"  // for WPARAM type
 #include "Smiley.h"     // for accessing the Smiley class
 
 #include <vector>       // for std::vector, which stores Smileys
 
+/// <summary>
+/// A class whose purpose is to abstract OpenGL code and provide a centralized way of viewing and executing code.
+/// One good example is the Draw method, which handles all the drawing.
+/// </summary>
 class Program
 {
 private:
