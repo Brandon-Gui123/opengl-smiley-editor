@@ -15,5 +15,5 @@ Color3f::Color3f(float red, float green, float blue) : red(red), green(green), b
 
 Color3f::operator Color4f() const
 {
-    return Color4f(red, green, blue, 1.0f);
+    return Color4f{red, green, blue, 1.0f};
 }

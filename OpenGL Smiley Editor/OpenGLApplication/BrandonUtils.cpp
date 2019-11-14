@@ -47,7 +47,7 @@ bool BrandonUtils::isApproximatelyEqual(double first, double second)
     // otherwise, fallback to Knuth's algorithm for relative epsilon
 
     // select the larger value among the two floats
-    float largerValue = (fabs(first) < fabs(second)) ? fabs(second) : fabs(first);
+    double largerValue{(fabs(first) < fabs(second)) ? fabs(second) : fabs(first)};
 
     // calculate the relative epsilon because the absolute epsilon is too big for 
     // extremely small values (values smaller than the epsilon) and too small for
@@ -55,19 +55,19 @@ bool BrandonUtils::isApproximatelyEqual(double first, double second)
     // so we need to pick a good epsilon for comparison
     // here, the epsilon is a percentage, and we use it to ask if
     // the smaller float is within the "epsilon" percentage of the larger float
-    float relativeEpsilon = largerValue * USER_DEFINED_MATH_EPSILON;
+    double relativeEpsilon{largerValue * USER_DEFINED_MATH_EPSILON};
 
     return fabs(first - second) <= relativeEpsilon;
 }
 
 Vector2f BrandonUtils::winCoordsToOpenGL(const Vector2f &winCoords, const Vector2f &winSize)
 {
-    return Vector2f(map(winCoords.x, 0, winSize.x, -1, 1), map(winCoords.y, 0, winSize.y, 1, -1));
+    return Vector2f{map(winCoords.x, 0, winSize.x, -1, 1), map(winCoords.y, 0, winSize.y, 1, -1)};
 }
 
 Vector2f BrandonUtils::openGLCoordsToWindows(const Vector2f &openGLCoords, const Vector2f &winSize)
 {
-    return Vector2f(map(openGLCoords.x, -1, 1, 0, winSize.x), map(openGLCoords.y, 1, -1, 0, winSize.y));
+    return Vector2f{map(openGLCoords.x, -1, 1, 0, winSize.x), map(openGLCoords.y, 1, -1, 0, winSize.y)};
 }
 
 float BrandonUtils::degToRad(float degrees)
