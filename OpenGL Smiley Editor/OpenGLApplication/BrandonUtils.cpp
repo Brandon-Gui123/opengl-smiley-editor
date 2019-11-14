@@ -35,7 +35,7 @@ float BrandonUtils::map(float current, float oldMin, float oldMax, float newMin,
     return (((current - oldMin) / (oldMax - oldMin)) * (newMax - newMin)) + newMin;
 }
 
-bool BrandonUtils::isApproximatelyEqual(float first, float second)
+bool BrandonUtils::isApproximatelyEqual(double first, double second)
 {
     // since relative epsilon comparison fails when numbers approach closer to zero,
     // we will first check using an absolute epsilon
