@@ -154,7 +154,7 @@ void Smiley::Draw()
     Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
 
     // the shadow of the smiley
-    DrawCircle(position + Vector2f(0.025f, -0.025f), radius, Color4f(0, 0, 0, 0.5f), false);
+    DrawCircle(position + Vector2f(0.025f, -0.025f), radius, Color4f(0, 0, 0, 0.4f), false);
 
     // the face of the smiley
     DrawFace(position, radius, smileyColor);
