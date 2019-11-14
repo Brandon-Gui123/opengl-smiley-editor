@@ -21,6 +21,12 @@
 
 void Program::Draw()
 {
+    // enables blending of colours in OpenGL
+    glEnable(GL_BLEND);
+
+    // specifies how to blend red, green and blue colours, as well as alphas
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     DrawGrayAxes();
 
     // draw all smileys
@@ -28,6 +34,9 @@ void Program::Draw()
     {
         (*smileyPtrIterator)->Draw();
     }
+
+    // disable blending so that other shapes or colours don't get blended in when we don't want them too
+    glDisable(GL_BLEND);
 }
 
 Program::Program()

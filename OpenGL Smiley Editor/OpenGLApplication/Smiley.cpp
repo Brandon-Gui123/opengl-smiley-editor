@@ -6,6 +6,7 @@
 #include "Smiley.h"
 
 #include "Color3f.h"        // for colours
+#include "Color4f.h"        // for colours, with transparency support
 #include "BrandonUtils.h"   // for converting from degrees to radians
 #include "Vector2f.h"       // for positions
 
@@ -84,13 +85,13 @@ void Smiley::DrawArc(const Vector2f &position, float radius, float startAngle, f
     glEnd();
 }
 
-void Smiley::DrawCircle(const Vector2f &position, float radius, const Color3f &circleColour, bool colorOutline, int resolution) const
+void Smiley::DrawCircle(const Vector2f &position, float radius, const Color4f &circleColour, bool colorOutline, int resolution) const
 {
     // a new vertex will be placed at every "step"
     float step{360.f / resolution};
     
     // drawing the outline of the circle
-    glColor3f(circleColour.red, circleColour.green, circleColour.blue);
+    glColor4f(circleColour.red, circleColour.green, circleColour.blue, circleColour.alpha);
     glBegin(colorOutline ? GL_LINE_LOOP : GL_POLYGON);
         
         for (int i{0}; i < resolution; i++)
@@ -103,16 +104,16 @@ void Smiley::DrawCircle(const Vector2f &position, float radius, const Color3f &c
     glEnd();
 }
 
-void Smiley::DrawFace(const Vector2f &position, float radius, const Color3f &faceOutlineColor, int resolution) const
+void Smiley::DrawFace(const Vector2f &position, float radius, const Color4f &faceOutlineColor, int resolution) const
 {
     // draws a circle filled with white colour acting as the base
-    DrawCircle(position, radius, Color3f(1.f, 1.f, 1.f), false, resolution);
+    DrawCircle(position, radius, Color4f(1.f, 1.f, 1.f, 1.f), false, resolution);
 
     // draws an outline of the circle
     DrawCircle(position, radius, faceOutlineColor, true, resolution);
 }
 
-void Smiley::DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color3f &eyeColor) const
+void Smiley::DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color4f &eyeColor) const
 {
     DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // left eye
     DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // right eye
@@ -152,6 +153,9 @@ void Smiley::Draw()
 {
     Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
 
+    // the shadow of the smiley
+    DrawCircle(position + Vector2f(0.025f, -0.025f), radius, Color4f(0, 0, 0, 0.4f), false);
+
     // the face of the smiley
     DrawFace(position, radius, smileyColor);
 
@@ -159,7 +163,7 @@ void Smiley::Draw()
     DrawEyes(position + eyePosition, eyeRadius, eyeDistanceApart, smileyColor);
 
     // the mouth
-    DrawMouth(position, mouthSize, !isSelected, smileyColor);
+    DrawMouth(position, mouthSize, !isSelected, Color3f(smileyColor.red, smileyColor.green, smileyColor.blue));
 }
 
 bool Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
