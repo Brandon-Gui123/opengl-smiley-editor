@@ -36,7 +36,6 @@ HINSTANCE hInst;                        // current instance
 WCHAR szTitle[MAX_LOADSTRING];          // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];    // the main window class name
 
-HCURSOR hCursor{GetCursor()};
 Program *ptrProgram { new Program() };
 
 // Pixel Format Descriptor
@@ -265,8 +264,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 // ctrl key
                 case VK_CONTROL:
-                    hCursor = LoadCursor(NULL, IDC_SIZEWE);
-                    SetCursor(hCursor);
                     ptrProgram->OnCtrlKeyDown(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
                     break;
 
@@ -284,23 +281,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 // ctrl key
                 case VK_CONTROL:
-                    hCursor = LoadCursor(NULL, IDC_ARROW);
-                    SetCursor(hCursor);
-                    
                     ptrProgram->OnCtrlKeyUp(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
                     break;
             }
 
             break;
         }
-        case WM_SETCURSOR:
+        case WM_SETCURSOR:  // this message must be processed or else the system redraws the cursor and it will flicker
         {
-            if (LOWORD(lParam) == HTCLIENT)
-            {
-                SetCursor(hCursor);
-            }
-        }
+
             break;
+        }
         case WM_DESTROY:
 
             // save all smileys to a text file
@@ -312,9 +303,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ptrProgram = nullptr;
 
             PostQuitMessage(0);
-            hCursor = LoadCursor(NULL, IDC_ARROW);
-            SetCursor(hCursor);
-
             break;
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

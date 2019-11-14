@@ -24,7 +24,8 @@ private:
     std::vector<Smiley*> smileyPtrs;
     int smileyCapacity{10};
 
-    HCURSOR hCursor{};
+    HCURSOR hArrowCursor{LoadCursor(NULL, IDC_ARROW)};
+    HCURSOR hResizeCursor{LoadCursor(NULL, IDC_SIZEWE)};
 
 public:
 
