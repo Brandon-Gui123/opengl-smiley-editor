@@ -287,6 +287,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             break;
         }
+        case WM_SETCURSOR:  // this message must be processed or else the system redraws the cursor and it will flicker
+        {
+
+            break;
+        }
         case WM_DESTROY:
 
             // save all smileys to a text file

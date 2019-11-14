@@ -44,6 +44,9 @@ Program::Program()
         // provide a Smiley if there's nothing in the file
         smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.125f));
     }
+
+    // set cursor to the appropriate icon
+    SetCursor(hArrowCursor);
 }
 
 Program::~Program()
@@ -58,6 +61,9 @@ Program::~Program()
 
     // clear the vector to remove the null pointers in the vector
     smileyPtrs.clear();
+
+    // set cursor back to the appropriate icon
+    SetCursor(hArrowCursor);
 }
 
 void Program::DrawGrayAxes()
@@ -281,6 +287,8 @@ void Program::OnDelKeyDown()
 
 void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
 {
+    SetCursor(hResizeCursor);
+
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
         (*smileyPtrIterator)->OnCtrlKeyDown(openGL_mousePosition);
@@ -289,6 +297,8 @@ void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
 
 void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 {
+    SetCursor(hArrowCursor);
+
     for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
     {
         (*smileyPtrIterator)->OnCtrlKeyUp(openGL_mousePosition);
