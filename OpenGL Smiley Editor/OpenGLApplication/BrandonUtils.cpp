@@ -39,7 +39,7 @@ bool BrandonUtils::isApproximatelyEqual(double first, double second)
 {
     // since relative epsilon comparison fails when numbers approach closer to zero,
     // we will first check using an absolute epsilon
-    if (fabs(first - second) <= userDefined_mathEpsilon)
+    if (fabs(first - second) <= UserDefinedConstants::mathEpsilon)
     {
         return true;
     }
@@ -55,7 +55,7 @@ bool BrandonUtils::isApproximatelyEqual(double first, double second)
     // so we need to pick a good epsilon for comparison
     // here, the epsilon is a percentage, and we use it to ask if
     // the smaller float is within the "epsilon" percentage of the larger float
-    double relativeEpsilon{largerValue * userDefined_mathEpsilon};
+    double relativeEpsilon{largerValue * UserDefinedConstants::mathEpsilon};
 
     return fabs(first - second) <= relativeEpsilon;
 }

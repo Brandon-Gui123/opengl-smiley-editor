@@ -8,7 +8,9 @@
 #ifndef USER_DEFINED_CONSTANTS_H
 #define USER_DEFINED_CONSTANTS_H
 
-/// <summary>An extremely small value used to check if two float values are "close enough" to be considered equal.</summary>
-constexpr double userDefined_mathEpsilon{1e-8};
-
+namespace UserDefinedConstants
+{
+    /// <summary>An extremely small value used to check if two float values are "close enough" to be considered equal.</summary>
+    constexpr double mathEpsilon{1e-8};
+}
 #endif
