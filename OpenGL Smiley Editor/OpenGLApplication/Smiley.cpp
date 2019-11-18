@@ -20,7 +20,7 @@
 Smiley::Smiley(const Vector2f &position, float radius) : position(position), radius(radius)
 {
     // calculate values that alter the eyes and mouth, which are relative to the radius of the smiley
-    eyePosition = Vector2f(0, radius * 0.25f);
+    eyePosition = Vector2f{0, radius * 0.25f};
     eyeRadius = radius * 0.1875f;
     eyeDistanceApart = radius * 0.75f;
     mouthSize = radius * 0.625f;
@@ -107,7 +107,7 @@ void Smiley::DrawCircle(const Vector2f &position, float radius, const Color4f &c
 void Smiley::DrawFace(const Vector2f &position, float radius, const Color4f &faceOutlineColor, int resolution) const
 {
     // draws a circle filled with white colour acting as the base
-    DrawCircle(position, radius, Color4f(1.f, 1.f, 1.f, 1.f), false, resolution);
+    DrawCircle(position, radius, Color4f{1.f, 1.f, 1.f, 1.f}, false, resolution);
 
     // draws an outline of the circle
     DrawCircle(position, radius, faceOutlineColor, true, resolution);
@@ -115,8 +115,8 @@ void Smiley::DrawFace(const Vector2f &position, float radius, const Color4f &fac
 
 void Smiley::DrawEyes(const Vector2f &position, float eyeRadius, float distanceApart, const Color4f &eyeColor) const
 {
-    DrawCircle(Vector2f(position.x - distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // left eye
-    DrawCircle(Vector2f(position.x + distanceApart / 2, position.y), eyeRadius, eyeColor, true);  // right eye
+    DrawCircle(Vector2f{position.x - distanceApart / 2, position.y}, eyeRadius, eyeColor, true);  // left eye
+    DrawCircle(Vector2f{position.x + distanceApart / 2, position.y}, eyeRadius, eyeColor, true);  // right eye
 }
 
 void Smiley::DrawMouth(const Vector2f &position, float radius, bool upsideDown, const Color3f &mouthColor) const
@@ -125,7 +125,7 @@ void Smiley::DrawMouth(const Vector2f &position, float radius, bool upsideDown, 
     {
         // note that drawing the arcs upside down require us to re-position it so that it looks like it is still in the same place
         // since this is the upper part of the circle
-        DrawArc(position - Vector2f(0, radius * 1.5f), radius, 300, 60, mouthColor);
+        DrawArc(position - Vector2f{0, radius * 1.5f}, radius, 300, 60, mouthColor);
     }
     else
     {
@@ -154,7 +154,7 @@ void Smiley::Draw()
     Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
 
     // the shadow of the smiley
-    DrawCircle(position + Vector2f(0.025f, -0.025f), radius, Color4f(0, 0, 0, 0.4f), false);
+    DrawCircle(position + Vector2f{0.025f, -0.025f}, radius, Color4f{0, 0, 0, 0.4f}, false);
 
     // the face of the smiley
     DrawFace(position, radius, smileyColor);

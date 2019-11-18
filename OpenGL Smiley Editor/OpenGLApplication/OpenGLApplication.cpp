@@ -22,12 +22,12 @@
 #define MAX_LOADSTRING 100
 
 // defines for extra width and height due to window toolbar and border
-#define EXTRA_WIDTH 16
-#define EXTRA_HEIGHT 60
+constexpr int extraWidth{16};
+constexpr int extraHeight{60};
 
 // Global Variables:
-Vector2f windowSize(400, 400);
-Vector2f mousePosition{};
+Vector2f windowSize{400.f, 400.f};
+Vector2f mousePosition{0.f, 0.f};
 GLuint PixelFormat;                     // Type is an OpenGL pre-defined unsigned int. These types ensure cross-platform compatibility.
 HDC hDC = NULL;                         // A handle to the device context
 HWND hWnd = NULL;                       // A handle to the window
@@ -36,7 +36,7 @@ HINSTANCE hInst;                        // current instance
 WCHAR szTitle[MAX_LOADSTRING];          // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];    // the main window class name
 
-Program *ptrProgram { new Program() };
+Program *ptrProgram { new Program{} };
 
 // Pixel Format Descriptor
 static PIXELFORMATDESCRIPTOR pfd
@@ -161,7 +161,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    // - WS_SYSMENU:    The window has a window menu on its title bar. This allows users to click on the "X" button on the right to close it.
    // We didn't include a minimize (WS_MINIMIZEBOX) and maximize button (WS_MAXIMIZEBOX) because we don't require it
    // and we also don't want to resize the window.
-   hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, windowSize.x + EXTRA_WIDTH, windowSize.y + EXTRA_HEIGHT, nullptr, nullptr, hInstance, nullptr);
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_VISIBLE | WS_CAPTION | WS_SYSMENU, 0, 0, windowSize.x + extraWidth, windowSize.y + extraHeight, nullptr, nullptr, hInstance, nullptr);
 
    // set the window title name to my name, as per the requirements
    // L"any string here" is a wchar_t literal

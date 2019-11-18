@@ -51,7 +51,7 @@ Program::Program()
     if (smileyPtrs.size() <= 0)
     {
         // provide a Smiley if there's nothing in the file
-        smileyPtrs.push_back(new Smiley(Vector2f(0.f, 0.f), 0.125f));
+        smileyPtrs.push_back(new Smiley{Vector2f{0.f, 0.f}, 0.125f});
     }
 
     // set cursor to the appropriate icon
@@ -134,12 +134,12 @@ void Program::LoadSmileysFromFile()
                     if (currentLine.compare("******") == 0)
                     {
                         // convert values to OpenGL
-                        Vector2f smileyPos_openGL{BrandonUtils::winCoordsToOpenGL(Vector2f(smileyPosX_window, smileyPosY_window), Vector2f(400, 400))};
+                        Vector2f smileyPos_openGL{BrandonUtils::winCoordsToOpenGL(Vector2f{smileyPosX_window, smileyPosY_window}, Vector2f{400, 400})};
                         float smileyRadius_openGL{BrandonUtils::map(smileyRadius_window, 0, 400, 0, 1)};
 
                         // constructs a new Smiley, then push it into the vector
                         // add radius back to the position because the position is for top-left corner
-                        smileyPtrs.push_back(new Smiley(smileyPos_openGL + Vector2f(smileyRadius_openGL, -smileyRadius_openGL), smileyRadius_openGL));
+                        smileyPtrs.push_back(new Smiley{smileyPos_openGL + Vector2f{smileyRadius_openGL, -smileyRadius_openGL}, smileyRadius_openGL});
                     }
                     break;
             }
@@ -168,7 +168,7 @@ void Program::SaveSmileysToFile()
         float smileyRadius{(*smileyPtrIterator)->GetRadius()};
 
         // calculate the window coordinates for the top-left corner of the Smiley
-        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f(-smileyRadius, smileyRadius), Vector2f(400, 400))};
+        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f{-smileyRadius, smileyRadius}, Vector2f{400, 400})};
 
         // write coordinates to file
         smileyFile_outputStream << topLeft.x << '\n';    // x-coordinate
@@ -201,7 +201,7 @@ void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
     // smileys drawn last will be at the very top
     for (int i{static_cast<int>(smileyPtrs.size()) - 1}; i >= 0; i--)
     {
-        bool smileyIsSelected = smileyPtrs.at(i)->OnLMouseButtonDown(openGL_mousePos);
+        bool smileyIsSelected{smileyPtrs.at(i)->OnLMouseButtonDown(openGL_mousePos)};
 
         if (smileyIsSelected)
         {
@@ -236,7 +236,7 @@ void Program::OnRMouseButtonDown(const Vector2f &openGL_mousePos)
 {
     if (smileyPtrs.size() < smileyPtrs.capacity())
     {
-        Smiley *newSmiley = new Smiley(openGL_mousePos, 0.125f);
+        Smiley *newSmiley{new Smiley{openGL_mousePos, 0.125f}};
 
         // only deselect if we have at least one smiley
         if (smileyPtrs.size() > 0)
