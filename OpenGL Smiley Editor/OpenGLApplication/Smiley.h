@@ -8,9 +8,9 @@
 #ifndef SMILEY_H
 #define SMILEY_H
 
-#include "Vector2f.h"   // for positions
 #include "Color3f.h"    // for colour values
 #include "Color4f.h"    // for colour values, but with transparency support as well
+#include "Vector2f.h"   // for positions
 
 #include "framework.h"  // for WPARAM
 

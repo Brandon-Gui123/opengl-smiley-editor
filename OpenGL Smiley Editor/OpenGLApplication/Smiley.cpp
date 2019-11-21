@@ -5,17 +5,17 @@
 
 #include "Smiley.h"
 
+#include "BrandonUtils.h"   // for converting from degrees to radians
 #include "Color3f.h"        // for colours
 #include "Color4f.h"        // for colours, with transparency support
-#include "BrandonUtils.h"   // for converting from degrees to radians
 #include "Vector2f.h"       // for positions
 
 #include "framework.h"      // include file for standard system include files or project specific include files
                             // which also includes the necessary files for drawing OpenGL shapes
 
+#include <cmath>            // for math functions like sin and cos
 #include <gl/GL.h>          // OpenGL 32-bit library
 #include <gl/GLU.h>         // GLU 32-bit library
-#include <cmath>            // for math functions like sin and cos
 
 Smiley::Smiley(const Vector2f &position, float radius) : position(position), radius(radius)
 {
