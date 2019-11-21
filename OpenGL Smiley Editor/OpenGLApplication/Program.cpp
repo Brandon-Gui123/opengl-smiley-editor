@@ -221,7 +221,7 @@ void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
             Smiley *selectedSmileyPtr{smileyPtrs.at(i)};
 
             // we shift all elements after the selected smiley down by one space
-            for (int j{i}; j < smileyPtrs.size() - 1; j++)
+            for (int j{i}; j < static_cast<int>(smileyPtrs.size()) - 1; j++)
             {
                 smileyPtrs[j] = smileyPtrs[j + 1];
             }
