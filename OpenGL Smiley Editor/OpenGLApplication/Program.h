@@ -8,8 +8,8 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include "Vector2f.h"   // for dealing with positions
 #include "Smiley.h"     // for accessing the Smiley class
+#include "Vector2f.h"   // for dealing with positions
 
 #include <vector>       // for std::vector, which stores Smileys
 

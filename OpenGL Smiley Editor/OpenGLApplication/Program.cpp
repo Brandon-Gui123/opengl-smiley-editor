@@ -12,12 +12,12 @@
 #include "framework.h"      // include file for standard system include files or project specific include files
                             // which also includes the necessary files for drawing OpenGL shapes
 
-#include <vector>           // for using vector methods
+#include <fstream>          // for reading and writing to files
 #include <gl/GL.h>          // OpenGL 32-bit library
 #include <gl/GLU.h>         // GLU 32-bit library
-#include <fstream>          // for reading and writing to files
 #include <ios>              // for determing the modes used when writing or reading files
 #include <string>           // for std::string
+#include <vector>           // for using vector methods
 
 void Program::Draw()
 {
