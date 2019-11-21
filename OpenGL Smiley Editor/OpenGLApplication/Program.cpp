@@ -30,9 +30,11 @@ void Program::Draw()
     DrawGrayAxes();
 
     // draw all smileys
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    // Smiley*& is a reference to a Smiley pointer
+    // we use a reference in this for-each loop to avoid making a copy of the Smiley pointer
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
-        (*smileyPtrIterator)->Draw();
+        smileyPtr->Draw();
     }
 
     // disable blending so that other shapes or colours don't get blended in when we don't want them too
@@ -62,10 +64,11 @@ Program::~Program()
 {
     // iterate through the vector of smiley pointers to deallocate memory used by the Smileys
     // then set its pointer to nullptr to prevent dangling pointers
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    // Smiley*& is a reference to a Smiley pointer
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
-        delete (*smileyPtrIterator);
-        (*smileyPtrIterator) = nullptr;
+        delete smileyPtr;
+        smileyPtr = nullptr;
     }
 
     // clear the vector to remove the null pointers in the vector
@@ -162,13 +165,13 @@ void Program::SaveSmileysToFile()
     // will write to the file (std::ios::out), replacing all of its contents with new ones (std::ios::trunc)
     smileyFile_outputStream.open("smileys.txt", std::ios::out | std::ios::trunc);
 
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
         // obtain the radius of the smiley to calculate top-left corner coordinate
-        float smileyRadius{(*smileyPtrIterator)->GetRadius()};
+        float smileyRadius{smileyPtr->GetRadius()};
 
         // calculate the window coordinates for the top-left corner of the Smiley
-        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows((*smileyPtrIterator)->GetPosition() + Vector2f{-smileyRadius, smileyRadius}, Vector2f{400, 400})};
+        Vector2f topLeft{BrandonUtils::openGLCoordsToWindows(smileyPtr->GetPosition() + Vector2f{-smileyRadius, smileyRadius}, Vector2f{400, 400})};
 
         // write coordinates to file
         smileyFile_outputStream << topLeft.x << '\n';    // x-coordinate
@@ -188,9 +191,9 @@ void Program::SaveSmileysToFile()
 void Program::OnMouseMove(const Vector2f &openGL_mousePos, const WPARAM &wParam)
 {
     // let all smileys process the mouse movement
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
-        (*smileyPtrIterator)->OnMouseMove(openGL_mousePos, wParam);
+        smileyPtr->OnMouseMove(openGL_mousePos, wParam);
     }
 }
 
@@ -298,9 +301,9 @@ void Program::OnCtrlKeyDown(const Vector2f &openGL_mousePosition)
 {
     SetCursor(hResizeCursor);
 
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
-        (*smileyPtrIterator)->OnCtrlKeyDown(openGL_mousePosition);
+        smileyPtr->OnCtrlKeyDown(openGL_mousePosition);
     }
 }
 
@@ -308,8 +311,8 @@ void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 {
     SetCursor(hArrowCursor);
 
-    for (auto smileyPtrIterator{smileyPtrs.begin()}; smileyPtrIterator != smileyPtrs.end(); smileyPtrIterator++)
+    for (Smiley *&smileyPtr : smileyPtrs)
     {
-        (*smileyPtrIterator)->OnCtrlKeyUp(openGL_mousePosition);
+        smileyPtr->OnCtrlKeyUp(openGL_mousePosition);
     }
 }
