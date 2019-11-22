@@ -35,31 +35,6 @@ float BrandonUtils::map(float current, float oldMin, float oldMax, float newMin,
     return (((current - oldMin) / (oldMax - oldMin)) * (newMax - newMin)) + newMin;
 }
 
-bool BrandonUtils::isApproximatelyEqual(double first, double second)
-{
-    // since relative epsilon comparison fails when numbers approach closer to zero,
-    // we will first check using an absolute epsilon
-    if (fabs(first - second) <= UserDefinedConstants::mathEpsilon)
-    {
-        return true;
-    }
-
-    // otherwise, fallback to Knuth's algorithm for relative epsilon
-
-    // select the larger value among the two floats
-    double largerValue{(fabs(first) < fabs(second)) ? fabs(second) : fabs(first)};
-
-    // calculate the relative epsilon because the absolute epsilon is too big for 
-    // extremely small values (values smaller than the epsilon) and too small for
-    // huge values (values way way larger than the epsilon, like 10,000, making 10,000.001 not equal to 10,000)
-    // so we need to pick a good epsilon for comparison
-    // here, the epsilon is a percentage, and we use it to ask if
-    // the smaller float is within the "epsilon" percentage of the larger float
-    double relativeEpsilon{largerValue * UserDefinedConstants::mathEpsilon};
-
-    return fabs(first - second) <= relativeEpsilon;
-}
-
 Vector2f BrandonUtils::winCoordsToOpenGL(const Vector2f &winCoords, const Vector2f &winSize)
 {
     return Vector2f{map(winCoords.x, 0, winSize.x, -1, 1), map(winCoords.y, 0, winSize.y, 1, -1)};
