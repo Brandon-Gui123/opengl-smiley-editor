@@ -36,9 +36,6 @@
     <ClInclude Include="BrandonUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserDefinedConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Smiley.h">
       <Filter>Header Files</Filter>
     </ClInclude>
