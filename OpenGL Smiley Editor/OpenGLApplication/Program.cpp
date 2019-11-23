@@ -202,7 +202,7 @@ void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
     // let all smileys process the left mouse button down
     // we will start from the end of the vector to the beginning because
     // smileys drawn last will be at the very top
-    for (int i{static_cast<int>(smileyPtrs.size()) - 1}; i >= 0; i--)
+    for (int i{static_cast<int>(smileyPtrs.size()) - 1}; i >= 0; --i)
     {
         bool smileyIsSelected{smileyPtrs.at(i)->OnLMouseButtonDown(openGL_mousePos)};
 
@@ -221,7 +221,7 @@ void Program::OnLMouseButtonDown(const Vector2f &openGL_mousePos)
             Smiley *selectedSmileyPtr{smileyPtrs.at(i)};
 
             // we shift all elements after the selected smiley down by one space
-            for (int j{i}; j < static_cast<int>(smileyPtrs.size()) - 1; j++)
+            for (int j{i}; j < static_cast<int>(smileyPtrs.size()) - 1; ++j)
             {
                 smileyPtrs[j] = smileyPtrs[j + 1];
             }

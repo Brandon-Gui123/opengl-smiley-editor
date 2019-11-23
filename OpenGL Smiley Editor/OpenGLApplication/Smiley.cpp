@@ -94,7 +94,7 @@ void Smiley::DrawCircle(const Vector2f &position, float radius, const Color4f &c
     glColor4f(circleColour.red, circleColour.green, circleColour.blue, circleColour.alpha);
     glBegin(colorOutline ? GL_LINE_LOOP : GL_POLYGON);
         
-        for (int i{0}; i < resolution; i++)
+        for (int i{0}; i < resolution; ++i)
         {
             // convert from degrees to radians, convert from polar coordinates to cartesian coordinates,
             // then place the vertex down relative to the specified position
