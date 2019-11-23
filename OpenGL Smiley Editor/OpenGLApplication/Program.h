@@ -79,6 +79,11 @@ public:
     void OnTimerEnd(int deltaTime);
 
     ///// Other Functions /////
+
+    /// <summary>
+    /// Attempts to obtain a PoofParticles object in the vector that is not currently shown.
+    /// </summary>
+    bool TryGetAvailablePoofParticle(PoofParticles *&outPoofParticlesPtr);
 };
 
 #endif

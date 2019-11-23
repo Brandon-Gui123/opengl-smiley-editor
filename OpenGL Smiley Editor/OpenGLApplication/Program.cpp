@@ -37,6 +37,12 @@ void Program::Draw()
         smileyPtr->Draw();
     }
 
+    // draw all poof particles
+    for (PoofParticles &poofParticlesEl : poofParticles)
+    {
+        poofParticlesEl.Draw();
+    }
+
     // disable blending so that other shapes or colours don't get blended in when we don't want them too
     glDisable(GL_BLEND);
 }
@@ -50,6 +56,12 @@ Program::Program()
     // this is so that if for some reason we were to delete all Smileys at the same time
     // we won't have to resize the vector
     poofParticles.reserve(smileyCapacity);
+
+    // initialize the poof particles vector
+    for (int i{0}; i < poofParticles.capacity(); ++i)
+    {
+        poofParticles.push_back(PoofParticles{Vector2f{}, 0.1f, 0.2f, 8});
+    }
 
     // read smileys from file
     LoadSmileysFromFile();
@@ -279,6 +291,36 @@ void Program::OnDelKeyDown()
         // because it has to be selected for deletion to occur
         if (lastSmileyPtr->GetIsSelected())
         {
+            // we had to use a pointer and not a reference because
+            // a reference must always be initialized
+            PoofParticles *obtainedPoofParticlesPtr{nullptr};
+
+            if (TryGetAvailablePoofParticle(obtainedPoofParticlesPtr))
+            {
+                // dereference here so we don't have to later
+                PoofParticles &poofParticlesEl{*obtainedPoofParticlesPtr};
+
+                // set necessary fields in the obtained PoofParticles object
+                poofParticlesEl.SetPosition(lastSmileyPtr->GetPosition());
+                poofParticlesEl.SetOuterRadius(lastSmileyPtr->GetRadius());
+                poofParticlesEl.SetInnerRadius(0.2f);
+                poofParticlesEl.SetLineColor(Color4f{1, 0, 0, 1});
+            }
+            else
+            {
+                // push another PoofParticles object into the vector
+                poofParticles.push_back(PoofParticles{lastSmileyPtr->GetPosition(), 0.2f, lastSmileyPtr->GetRadius(), 8});
+
+                // what we are doing here is dereferencing the iterator which points to the end of the last element
+                // in the vector, then obtaining the memory address of the object that was dereferenced
+                // this is necessary to go from std::vector<PoofParticles>::iterator to PoofParticles*
+                // we also need to decrement the vector because, don't forget, it is pointing just right outside the vector
+                obtainedPoofParticlesPtr = &*(--poofParticles.end());
+            }
+
+            // ensure that the PoofParticles show up
+            obtainedPoofParticlesPtr->SetShown(true);
+
             // free up allocated memory used by the smiley
             // then set its pointer to nullptr to prevent dangling pointers
             delete lastSmileyPtr;
@@ -323,4 +365,26 @@ void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 }
 
 void Program::OnTimerEnd(int deltaTime)
-{}
+{
+    for (PoofParticles &poofParticlesEl : poofParticles)
+    {
+        if (poofParticlesEl.IsShown())
+        {
+            poofParticlesEl.Progress(deltaTime);
+        }
+    }
+}
+
+bool Program::TryGetAvailablePoofParticle(PoofParticles *&outPoofParticlesPtr)
+{
+    for (PoofParticles &poofParticlesEl : poofParticles)
+    {
+        if (!poofParticlesEl.IsShown())
+        {
+            outPoofParticlesPtr = &poofParticlesEl;
+            return true;
+        }
+    }
+
+    return false;
+}
