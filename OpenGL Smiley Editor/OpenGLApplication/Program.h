@@ -71,6 +71,11 @@ public:
     /// </summary>
     void OnCtrlKeyUp(const Vector2f &openGL_mousePosition);
 
+    /// <summary>
+    /// Called when the timer ends.
+    /// </summary>
+    void OnTimerEnd(int deltaTime);
+
     ///// Other Functions /////
 };
 

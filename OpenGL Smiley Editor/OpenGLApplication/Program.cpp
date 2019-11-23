@@ -316,3 +316,6 @@ void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
         smileyPtr->OnCtrlKeyUp(openGL_mousePosition);
     }
 }
+
+void Program::OnTimerEnd(int deltaTime)
+{}
