@@ -55,12 +55,12 @@ Program::Program()
     // set the capacity of the poof particles vector to be the same as the smiley vector
     // this is so that if for some reason we were to delete all Smileys at the same time
     // we won't have to resize the vector
-    poofParticles.reserve(smileyCapacity);
+    poofParticles.reserve(1);
 
     // initialize the poof particles vector
     for (int i{0}; i < poofParticles.capacity(); ++i)
     {
-        poofParticles.push_back(PoofParticles{Vector2f{}, 0.1f, 0.2f, 8});
+        poofParticles.push_back(PoofParticles{});
     }
 
     // read smileys from file
@@ -303,13 +303,15 @@ void Program::OnDelKeyDown()
                 // set necessary fields in the obtained PoofParticles object
                 poofParticlesEl.SetPosition(lastSmileyPtr->GetPosition());
                 poofParticlesEl.SetOuterRadius(lastSmileyPtr->GetRadius());
-                poofParticlesEl.SetInnerRadius(0.2f);
+                poofParticlesEl.SetInnerRadius(lastSmileyPtr->GetRadius() / 2);
                 poofParticlesEl.SetLineColor(Color4f{1, 0, 0, 1});
+                poofParticlesEl.SetCurrentInnerRadius(lastSmileyPtr->GetRadius() / 2);
+                poofParticlesEl.SetCurrentOuterRadius(lastSmileyPtr->GetRadius() / 2);
             }
             else
             {
                 // push another PoofParticles object into the vector
-                poofParticles.push_back(PoofParticles{lastSmileyPtr->GetPosition(), 0.2f, lastSmileyPtr->GetRadius(), 8});
+                poofParticles.push_back(PoofParticles{lastSmileyPtr->GetPosition(), lastSmileyPtr->GetRadius() / 2, lastSmileyPtr->GetRadius(), 8});
 
                 // what we are doing here is dereferencing the iterator which points to the end of the last element
                 // in the vector, then obtaining the memory address of the object that was dereferenced

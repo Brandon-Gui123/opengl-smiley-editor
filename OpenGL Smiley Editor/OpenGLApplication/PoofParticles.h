@@ -19,8 +19,9 @@ private:
     float currentOuterRadius;
     bool shown{false};
 
-    int activeTime{250};
+    int activeTime{150};
     int currentTime{0};
+    float progress{0};
 
 public:
 
@@ -38,7 +39,11 @@ public:
 
     void SetLineColor(const Color4f &newLineColor);
 
-    void ResetTimer();
+    void SetCurrentInnerRadius(float newInnerRadius);
+
+    void SetCurrentOuterRadius(float newOuterRadius);
+
+    void ResetAnimation();
 
     void Draw();
 
