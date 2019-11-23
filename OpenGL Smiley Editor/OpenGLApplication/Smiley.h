@@ -25,14 +25,14 @@ private:
     float minRadius{20.f / 400.f};
     float maxRadius{400.f / 400.f};
 
-    Vector2f cursorPositionWhenSelected{};      // The position of the cursor when it is selected
-    Vector2f positionDiffFromCursorAndSmiley{};  // The position difference between the cursor and the Smiley. Prevents Smiley from jumping around during movement
-    float initialRadiusWhenSelected{};           // The radius of the smiley when it is selected
-    bool isCursorInside{false};                 // Whether or not the cursor is inside the smiley
-    bool radiusClamped{false};                  // Whether the radius has been clamped because it is too big or too small.
+    Vector2f cursorPositionWhenSelected{};          // The position of the cursor when it is selected
+    Vector2f positionDiffFromCursorAndSmiley{};     // The position difference between the cursor and the Smiley. Prevents Smiley from jumping around during movement
+    float initialRadiusWhenSelected{};              // The radius of the smiley when it is selected
+    bool isCursorInside{false};                     // Whether or not the cursor is inside the smiley
+    bool radiusClamped{false};                      // Whether the radius has been clamped because it is too big or too small.
 
-    Color3f colorWhenUnselected{Color3f(0, 0, 1)};  // The color of the Smiley when it isn't selected.
-    Color3f colorWhenSelected{Color3f(1, 0, 0)};    // The color of the Smiley when it is selected.
+    Color3f colorWhenUnselected{0, 0, 1};           // The color of the Smiley when it isn't selected.
+    Color3f colorWhenSelected{1, 0, 0};             // The color of the Smiley when it is selected.
 
     Vector2f eyePosition{};  // The coordinates where the eyes are positioned.
     float eyeRadius{};        // The size of the eyes.
