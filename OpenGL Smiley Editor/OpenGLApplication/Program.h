@@ -8,8 +8,9 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include "Smiley.h"     // for accessing the Smiley class
-#include "Vector2f.h"   // for dealing with positions
+#include "PoofParticles.h"  // for the poof particles when the Smileys get deleted
+#include "Smiley.h"         // for accessing the Smiley class
+#include "Vector2f.h"       // for dealing with positions
 
 #include <vector>       // for std::vector, which stores Smileys
 
@@ -22,6 +23,7 @@ class Program
 private:
 
     std::vector<Smiley*> smileyPtrs;
+    std::vector<PoofParticles> poofParticles;
     int smileyCapacity{10};
 
     HCURSOR hArrowCursor{LoadCursor(NULL, IDC_ARROW)};
