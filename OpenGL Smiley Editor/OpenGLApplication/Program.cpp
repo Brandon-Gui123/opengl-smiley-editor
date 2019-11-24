@@ -55,7 +55,7 @@ Program::Program()
     // set the capacity of the poof particles vector to be the same as the smiley vector
     // this is so that if for some reason we were to delete all Smileys at the same time
     // we won't have to resize the vector
-    poofParticles.reserve(1);
+    poofParticles.reserve(smileyCapacity);
 
     // initialize the poof particles vector
     for (int i{0}; i < poofParticles.capacity(); ++i)
