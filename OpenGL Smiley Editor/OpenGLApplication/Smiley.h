@@ -40,6 +40,8 @@ private:
 
     float mouthSize{};        // How wide will the mouth be
 
+    Color3f currentColor;                           // The current color of the Smiley.
+
 public:
     
     /// <summary>Constructs a Smiley with the specified position and radius, in OpenGL coordinates.</summary>
@@ -52,6 +54,7 @@ public:
 
     Vector2f GetPosition() const;
     float GetRadius() const;
+    Color3f GetColor() const;
 
 private:
 
