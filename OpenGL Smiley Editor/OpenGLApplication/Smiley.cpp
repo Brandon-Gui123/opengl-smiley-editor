@@ -24,16 +24,19 @@ Smiley::Smiley(const Vector2f &position, float radius) : position(position), rad
     eyeRadius = radius * 0.1875f;
     eyeDistanceApart = radius * 0.75f;
     mouthSize = radius * 0.625f;
+    currentColor = colorWhenUnselected;
 }
 
 void Smiley::Select()
 {
     isSelected = true;
+    currentColor = colorWhenSelected;
 }
 
 void Smiley::Deselect()
 {
     isSelected = false;
+    currentColor = colorWhenUnselected;
 }
 
 bool Smiley::GetIsSelected() const
@@ -49,6 +52,11 @@ Vector2f Smiley::GetPosition() const
 float Smiley::GetRadius() const
 {
     return radius;
+}
+
+Color3f Smiley::GetColor() const
+{
+    return currentColor;
 }
 
 ///// Drawing Methods /////
@@ -151,19 +159,17 @@ void Smiley::OnResize()
 
 void Smiley::Draw()
 {
-    Color3f smileyColor { isSelected ? colorWhenSelected : colorWhenUnselected };
-
     // the shadow of the smiley
     DrawCircle(position + Vector2f{0.025f, -0.025f}, radius, Color4f{0, 0, 0, 0.4f}, false);
 
     // the face of the smiley
-    DrawFace(position, radius, smileyColor);
+    DrawFace(position, radius, currentColor);
 
     // the eyes of the smiley
-    DrawEyes(position + eyePosition, eyeRadius, eyeDistanceApart, smileyColor);
+    DrawEyes(position + eyePosition, eyeRadius, eyeDistanceApart, currentColor);
 
     // the mouth
-    DrawMouth(position, mouthSize, !isSelected, Color3f(smileyColor.red, smileyColor.green, smileyColor.blue));
+    DrawMouth(position, mouthSize, !isSelected, Color3f(currentColor.red, currentColor.green, currentColor.blue));
 }
 
 bool Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
@@ -183,6 +189,8 @@ bool Smiley::OnLMouseButtonDown(const Vector2f &openGL_mousePosition)
         // calculate the vector that points from the cursor to the smiley's position
         positionDiffFromCursorAndSmiley = position - openGL_mousePosition;
     }
+
+    currentColor = isSelected ? colorWhenSelected : colorWhenUnselected;
 
     return isSelected;
 }

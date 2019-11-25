@@ -25,6 +25,13 @@
 constexpr int extraWidth{16};
 constexpr int extraHeight{60};
 
+/// <summary>
+/// The length of the timer in milliseconds before it loops over.
+/// The value is determined by dividing 100 milliseconds by 60 frames to
+/// get the duration between timer calls.
+/// </summary>
+constexpr int timerDuration{16};
+
 // Global Variables:
 Vector2f windowSize{400.f, 400.f};
 Vector2f mousePosition{0.f, 0.f};
@@ -62,9 +69,16 @@ static PIXELFORMATDESCRIPTOR pfd
 };
 
 // Forward declarations created by this developer:
-int InitOpenGL();
-void ReSizeGLScene(GLsizei width, GLsizei height);
-void DrawGLScene();
+    int InitOpenGL();
+    void ReSizeGLScene(GLsizei width, GLsizei height);
+    void DrawGLScene();
+
+    /// <summary>
+    /// A callback function that gets called by the timer at a specified interval.
+    /// The calling convention must match those of TIMERPROC.
+    /// See https://docs.microsoft.com/en-us/windows/win32/winmsg/using-timers for more details.
+    /// </summary>
+    void TimerProc(HWND Arg1, UINT Arg2, UINT_PTR Arg3, DWORD Arg4);
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -111,6 +125,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     return (int) msg.wParam;
+}
+
+void TimerProc(HWND Arg1, UINT Arg2, UINT_PTR Arg3, DWORD Arg4)
+{
+    ptrProgram->OnTimerEnd(timerDuration);
 }
 
 //
@@ -398,6 +417,9 @@ int InitOpenGL()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+    // sets a timer that calls the given callback function at a certain interval
+    SetTimer(hWnd, NULL, timerDuration, (TIMERPROC) TimerProc);
 
     return 1;
 }
