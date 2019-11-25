@@ -367,6 +367,14 @@ void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
     }
 }
 
+void Program::OnShiftKeyDown()
+{
+}
+
+void Program::OnShiftKeyUp()
+{
+}
+
 void Program::OnTimerEnd(int deltaTime)
 {
     for (PoofParticles &poofParticlesEl : poofParticles)

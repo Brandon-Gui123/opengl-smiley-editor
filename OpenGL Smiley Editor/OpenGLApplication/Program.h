@@ -74,6 +74,16 @@ public:
     void OnCtrlKeyUp(const Vector2f &openGL_mousePosition);
 
     /// <summary>
+    /// Called when the "Shift" key is pressed down.
+    /// </summary>
+    void OnShiftKeyDown();
+
+    /// <summary>
+    /// Called when the "Shift" key is released.
+    /// </summary>
+    void OnShiftKeyUp();
+
+    /// <summary>
     /// Called when the timer ends.
     /// </summary>
     void OnTimerEnd(int deltaTime);
