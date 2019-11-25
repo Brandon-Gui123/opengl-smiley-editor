@@ -8,7 +8,6 @@
 #include <cmath>            // for trigonometric functions like sin and cos
 #include <gl/GL.h>          // OpenGL 32-bit library
 
-
 PoofParticles::PoofParticles() : position(Vector2f{0, 0}), innerRadius(0), outerRadius(0), numLines(8)
 {
     currentInnerRadius = innerRadius;
@@ -95,8 +94,14 @@ void PoofParticles::Draw()
 
 void PoofParticles::Progress(int deltaTime)
 {
+    // we progress time by adding it to a variable
     currentTime += deltaTime;
+
+    // the progress of the animation is calculated by dividing its current time by its time length
+    // giving us a value from 0 to 1
     progress = static_cast<float>(currentTime) / activeTime;
+
+    // we want to see the outer line vertex move out further, then afterwards the inner line vertex will move outwards
 
     // we want to animate it such that the outer radius will increase first, followed by the inner radius
     if (progress <= 0.5f)
