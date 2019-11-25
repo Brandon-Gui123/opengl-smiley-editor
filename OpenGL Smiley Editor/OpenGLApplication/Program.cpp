@@ -281,56 +281,120 @@ void Program::OnRMouseButtonDown(const Vector2f &openGL_mousePos)
 
 void Program::OnDelKeyDown()
 {
-    // deletion permitted if there is at least one Smiley
-    if (smileyPtrs.size() > 0)
+    if (shiftKeyDown)
     {
-        // get the Smiley pointer at the end of the vector
-        Smiley *lastSmileyPtr{smileyPtrs.at(smileyPtrs.size() - 1)};
-
-        // check if the last element of the vector of Smileys is selected
-        // because it has to be selected for deletion to occur
-        if (lastSmileyPtr->GetIsSelected())
+        // deletion permitted if there is at least one Smiley
+        if (smileyPtrs.size() > 0)
         {
-            // we had to use a pointer and not a reference because
-            // a reference must always be initialized
-            PoofParticles *obtainedPoofParticlesPtr{nullptr};
-
-            if (TryGetAvailablePoofParticle(obtainedPoofParticlesPtr))
+            // this will clear all Smileys (delete all)
+            for (Smiley *&smileyPtr : smileyPtrs)
             {
-                // dereference here so we don't have to later
-                PoofParticles &poofParticlesEl{*obtainedPoofParticlesPtr};
+                PoofParticles *obtainedPoofParticlesPtr{};
 
-                // set necessary fields in the obtained PoofParticles object
-                poofParticlesEl.SetPosition(lastSmileyPtr->GetPosition());
-                poofParticlesEl.SetOuterRadius(lastSmileyPtr->GetRadius());
-                poofParticlesEl.SetInnerRadius(lastSmileyPtr->GetRadius() / 3);
-                poofParticlesEl.SetLineColor(lastSmileyPtr->GetColor());
+                // attempt to get available poof particle
+                if (TryGetAvailablePoofParticle(obtainedPoofParticlesPtr))
+                {
+                    // dereference here so we don't have to later
+                    PoofParticles &poofParticlesEl{*obtainedPoofParticlesPtr};
+
+                    // set necessary fields in the obtained PoofParticles object
+                    poofParticlesEl.SetPosition(smileyPtr->GetPosition());
+                    poofParticlesEl.SetOuterRadius(smileyPtr->GetRadius());
+                    poofParticlesEl.SetInnerRadius(smileyPtr->GetRadius() / 3);
+                    poofParticlesEl.SetLineColor(smileyPtr->GetColor());
+                }
+                else
+                {
+                    // push another PoofParticles object into the vector
+                    poofParticles.push_back(PoofParticles{smileyPtr->GetPosition(), smileyPtr->GetRadius() / 2, smileyPtr->GetRadius(), 8});
+
+                    // what we are doing here is dereferencing the iterator which points to the end of the last element
+                    // in the vector, then obtaining the memory address of the object that was dereferenced
+                    // this is necessary to go from std::vector<PoofParticles>::iterator to PoofParticles*
+                    // we also need to decrement the vector because, don't forget, it is pointing just right outside the vector
+                    obtainedPoofParticlesPtr = &*(--poofParticles.end());
+                }
+
+                // reset the animation of the PoofParticles
+                obtainedPoofParticlesPtr->ResetAnimation();
+
+                // ensure that the PoofParticles show up
+                obtainedPoofParticlesPtr->SetShown(true);
+
+                // now we deallocate the memory of the Smiley pointer
+                delete smileyPtr;
+                smileyPtr = nullptr;
+            }
+            
+            // clear the vector of nullptrs
+            smileyPtrs.clear();
+        }
+        else
+        {
+            // deletion not allowed
+            // play system sound
+            MessageBeep(MB_OK);
+        }
+    }
+    else
+    {
+        // deletion permitted if there is at least one Smiley
+        if (smileyPtrs.size() > 0)
+        {
+            // get the Smiley pointer at the end of the vector
+            Smiley *lastSmileyPtr{smileyPtrs.at(smileyPtrs.size() - 1)};
+
+            // check if the last element of the vector of Smileys is selected
+            // because it has to be selected for deletion to occur
+            if (lastSmileyPtr->GetIsSelected())
+            {
+                // we had to use a pointer and not a reference because
+                // a reference must always be initialized
+                PoofParticles *obtainedPoofParticlesPtr{nullptr};
+
+                if (TryGetAvailablePoofParticle(obtainedPoofParticlesPtr))
+                {
+                    // dereference here so we don't have to later
+                    PoofParticles &poofParticlesEl{*obtainedPoofParticlesPtr};
+
+                    // set necessary fields in the obtained PoofParticles object
+                    poofParticlesEl.SetPosition(lastSmileyPtr->GetPosition());
+                    poofParticlesEl.SetOuterRadius(lastSmileyPtr->GetRadius());
+                    poofParticlesEl.SetInnerRadius(lastSmileyPtr->GetRadius() / 3);
+                    poofParticlesEl.SetLineColor(lastSmileyPtr->GetColor());
+                }
+                else
+                {
+                    // push another PoofParticles object into the vector
+                    poofParticles.push_back(PoofParticles{lastSmileyPtr->GetPosition(), lastSmileyPtr->GetRadius() / 2, lastSmileyPtr->GetRadius(), 8});
+
+                    // what we are doing here is dereferencing the iterator which points to the end of the last element
+                    // in the vector, then obtaining the memory address of the object that was dereferenced
+                    // this is necessary to go from std::vector<PoofParticles>::iterator to PoofParticles*
+                    // we also need to decrement the vector because, don't forget, it is pointing just right outside the vector
+                    obtainedPoofParticlesPtr = &*(--poofParticles.end());
+                }
+
+                // reset the animation of the PoofParticles
+                obtainedPoofParticlesPtr->ResetAnimation();
+
+                // ensure that the PoofParticles show up
+                obtainedPoofParticlesPtr->SetShown(true);
+
+                // free up allocated memory used by the smiley
+                // then set its pointer to nullptr to prevent dangling pointers
+                delete lastSmileyPtr;
+                lastSmileyPtr = nullptr;
+
+                // remove the last element of the vector
+                smileyPtrs.pop_back();
             }
             else
             {
-                // push another PoofParticles object into the vector
-                poofParticles.push_back(PoofParticles{lastSmileyPtr->GetPosition(), lastSmileyPtr->GetRadius() / 2, lastSmileyPtr->GetRadius(), 8});
-
-                // what we are doing here is dereferencing the iterator which points to the end of the last element
-                // in the vector, then obtaining the memory address of the object that was dereferenced
-                // this is necessary to go from std::vector<PoofParticles>::iterator to PoofParticles*
-                // we also need to decrement the vector because, don't forget, it is pointing just right outside the vector
-                obtainedPoofParticlesPtr = &*(--poofParticles.end());
+                // deletion not performed
+                // play default system beep sound
+                MessageBeep(MB_OK);
             }
-
-            // reset the animation of the PoofParticles
-            obtainedPoofParticlesPtr->ResetAnimation();
-
-            // ensure that the PoofParticles show up
-            obtainedPoofParticlesPtr->SetShown(true);
-
-            // free up allocated memory used by the smiley
-            // then set its pointer to nullptr to prevent dangling pointers
-            delete lastSmileyPtr;
-            lastSmileyPtr = nullptr;
-
-            // remove the last element of the vector
-            smileyPtrs.pop_back();
         }
         else
         {
@@ -338,12 +402,6 @@ void Program::OnDelKeyDown()
             // play default system beep sound
             MessageBeep(MB_OK);
         }
-    }
-    else
-    {
-        // deletion not performed
-        // play default system beep sound
-        MessageBeep(MB_OK);
     }
 }
 
