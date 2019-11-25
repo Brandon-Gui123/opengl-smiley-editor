@@ -303,10 +303,8 @@ void Program::OnDelKeyDown()
                 // set necessary fields in the obtained PoofParticles object
                 poofParticlesEl.SetPosition(lastSmileyPtr->GetPosition());
                 poofParticlesEl.SetOuterRadius(lastSmileyPtr->GetRadius());
-                poofParticlesEl.SetInnerRadius(lastSmileyPtr->GetRadius() / 2);
-                poofParticlesEl.SetLineColor(Color4f{1, 0, 0, 1});
-                poofParticlesEl.SetCurrentInnerRadius(lastSmileyPtr->GetRadius() / 2);
-                poofParticlesEl.SetCurrentOuterRadius(lastSmileyPtr->GetRadius() / 2);
+                poofParticlesEl.SetInnerRadius(lastSmileyPtr->GetRadius() / 3);
+                poofParticlesEl.SetLineColor(lastSmileyPtr->GetColor());
             }
             else
             {
@@ -319,6 +317,9 @@ void Program::OnDelKeyDown()
                 // we also need to decrement the vector because, don't forget, it is pointing just right outside the vector
                 obtainedPoofParticlesPtr = &*(--poofParticles.end());
             }
+
+            // reset the animation of the PoofParticles
+            obtainedPoofParticlesPtr->ResetAnimation();
 
             // ensure that the PoofParticles show up
             obtainedPoofParticlesPtr->SetShown(true);

@@ -52,16 +52,6 @@ void PoofParticles::SetLineColor(const Color4f &newLineColor)
     lineColor = newLineColor;
 }
 
-void PoofParticles::SetCurrentInnerRadius(float newInnerRadius)
-{
-    currentInnerRadius = newInnerRadius;
-}
-
-void PoofParticles::SetCurrentOuterRadius(float newOuterRadius)
-{
-    currentOuterRadius = newOuterRadius;
-}
-
 void PoofParticles::ResetAnimation()
 {
     currentTime = 0;
