@@ -110,6 +110,5 @@ void PoofParticles::Progress(int deltaTime)
     if (currentTime >= activeTime)
     {
         shown = false;
-        ResetAnimation();
     }
 }
