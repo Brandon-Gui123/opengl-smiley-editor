@@ -29,6 +29,8 @@ private:
     HCURSOR hArrowCursor{LoadCursor(NULL, IDC_ARROW)};
     HCURSOR hResizeCursor{LoadCursor(NULL, IDC_SIZEWE)};
 
+    bool shiftKeyDown{false};
+
 public:
 
     Program();

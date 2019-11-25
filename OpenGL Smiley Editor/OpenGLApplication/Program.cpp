@@ -369,10 +369,12 @@ void Program::OnCtrlKeyUp(const Vector2f &openGL_mousePosition)
 
 void Program::OnShiftKeyDown()
 {
+    shiftKeyDown = true;
 }
 
 void Program::OnShiftKeyUp()
 {
+    shiftKeyDown = false;
 }
 
 void Program::OnTimerEnd(int deltaTime)
