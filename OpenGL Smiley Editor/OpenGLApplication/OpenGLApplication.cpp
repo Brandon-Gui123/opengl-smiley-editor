@@ -290,6 +290,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case VK_DELETE:
                     ptrProgram->OnDelKeyDown();
                     break;
+
+                // shift key
+                case VK_SHIFT:
+                    break;
             }
 
             break;
@@ -301,6 +305,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 // ctrl key
                 case VK_CONTROL:
                     ptrProgram->OnCtrlKeyUp(BrandonUtils::winCoordsToOpenGL(mousePosition, windowSize));
+                    break;
+
+                // shift key
+                case VK_SHIFT:
                     break;
             }
 
