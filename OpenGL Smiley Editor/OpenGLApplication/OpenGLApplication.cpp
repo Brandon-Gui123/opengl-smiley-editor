@@ -293,6 +293,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
                 // shift key
                 case VK_SHIFT:
+                    ptrProgram->OnShiftKeyDown();
                     break;
             }
 
@@ -309,6 +310,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
                 // shift key
                 case VK_SHIFT:
+                    ptrProgram->OnShiftKeyUp();
                     break;
             }
 
