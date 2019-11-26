@@ -289,7 +289,7 @@ void Program::OnDelKeyDown()
             // this will clear all Smileys (delete all)
             for (Smiley *&smileyPtr : smileyPtrs)
             {
-                PoofParticles *obtainedPoofParticlesPtr{};
+                PoofParticles *obtainedPoofParticlesPtr{nullptr};
 
                 // attempt to get available poof particle
                 if (TryGetAvailablePoofParticle(obtainedPoofParticlesPtr))
