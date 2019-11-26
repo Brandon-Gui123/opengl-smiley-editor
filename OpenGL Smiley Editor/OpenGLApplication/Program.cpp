@@ -58,7 +58,10 @@ Program::Program()
     poofParticles.reserve(smileyCapacity);
 
     // initialize the poof particles vector
-    for (int i{0}; i < poofParticles.capacity(); ++i)
+    // type mismatch if we use "int i" so we are using a type alias to match the
+    // type returned by the vector's capacity method
+    using index_t = std::vector<Smiley>::size_type;
+    for (index_t i{0}; i < poofParticles.capacity(); ++i)
     {
         poofParticles.push_back(PoofParticles{});
     }
