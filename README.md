@@ -6,7 +6,7 @@ move them around, resize them and delete them.
 The following lists all features inside the application:
 
 ## Selecting Smileys
-To select a smiley, left click the smiley. Once a smiley has been selected, its colour and will be brought to the front of the canvas.
+To select a smiley, left click the smiley. Once a smiley has been selected, its colour will change and the smiley itself will be brought to the front of the canvas.
 
 Because smileys can occlude each other, you can only select visible parts of the smiley.
 
