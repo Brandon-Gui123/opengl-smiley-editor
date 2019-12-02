@@ -43,7 +43,7 @@ public:
 
     void Draw();
 
-    void Progress(int deltaTime);
+    void Update();
 };
 
 #endif
