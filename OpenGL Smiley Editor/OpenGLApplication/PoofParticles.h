@@ -19,8 +19,8 @@ private:
     float currentOuterRadius;   // The current outer radius of the particle lines.
     bool shown{false};          // Whether the poof particles are being shown on-screen.
 
-    int activeTime{250};
-    int currentTime{0};
+    double activeTime{0.5};
+    double currentTime{0};
     float progress{0};
 
 public:
