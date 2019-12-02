@@ -10,6 +10,7 @@
 
 #include "BrandonUtils.h"       // for converting from window coordinates to OpenGL coordinates
 #include "Program.h"            // custom class to abstract all these
+#include "Time.h"               // for starting internal timer and querying delta time
 #include "Vector2f.h"           // for mouse position
 
 #include "framework.h"          // include file for standard system include files or project specific include files
@@ -97,6 +98,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+    Time::StartInternalTimer();
+
     // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
@@ -107,6 +110,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
             DrawGLScene();
             SwapBuffers(hDC);
+
+            Time::QueryDeltaTimeFromInternalTimer();
         }
     }
 
