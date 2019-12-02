@@ -66,6 +66,7 @@ static PIXELFORMATDESCRIPTOR pfd
     int InitOpenGL();
     void ReSizeGLScene(GLsizei width, GLsizei height);
     void DrawGLScene();
+    void UpdateGLScene();
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -107,6 +108,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+
+            UpdateGLScene();
 
             DrawGLScene();
             SwapBuffers(hDC);
@@ -451,4 +454,8 @@ void DrawGLScene()
     {
         ptrProgram->Draw();
     }
+}
+
+void UpdateGLScene()
+{
 }
