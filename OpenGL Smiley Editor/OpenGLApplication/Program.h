@@ -86,9 +86,9 @@ public:
     void OnShiftKeyUp();
 
     /// <summary>
-    /// Called when the timer ends.
+    /// Called when scene is to be updated.
     /// </summary>
-    void OnTimerEnd(int deltaTime);
+    void Update();
 
     ///// Other Functions /////
 

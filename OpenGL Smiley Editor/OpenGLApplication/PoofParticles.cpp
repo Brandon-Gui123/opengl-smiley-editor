@@ -1,6 +1,7 @@
 #include "PoofParticles.h"
 
 #include "BrandonUtils.h"   // for converting from degrees to radians
+#include "Time.h"           // for obtaining delta time
 
 #include "framework.h"      // include file for standard system include files or project specific include files
                             // which also includes the necessary files for drawing OpenGL shapes
@@ -82,10 +83,10 @@ void PoofParticles::Draw()
     glEnd();
 }
 
-void PoofParticles::Progress(int deltaTime)
+void PoofParticles::Update()
 {
     // we progress time by adding it to a variable
-    currentTime += deltaTime;
+    currentTime += Time::GetDeltaTime();
 
     // the progress of the animation is calculated by dividing its current time by its time length
     // giving us a value from 0 to 1
