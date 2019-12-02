@@ -438,13 +438,13 @@ void Program::OnShiftKeyUp()
     shiftKeyDown = false;
 }
 
-void Program::OnTimerEnd(int deltaTime)
+void Program::Update()
 {
     for (PoofParticles &poofParticlesEl : poofParticles)
     {
         if (poofParticlesEl.IsShown())
         {
-            poofParticlesEl.Progress(deltaTime);
+            poofParticlesEl.Update();
         }
     }
 }

@@ -458,4 +458,8 @@ void DrawGLScene()
 
 void UpdateGLScene()
 {
+    if (ptrProgram != nullptr)
+    {
+        ptrProgram->Update();
+    }
 }
