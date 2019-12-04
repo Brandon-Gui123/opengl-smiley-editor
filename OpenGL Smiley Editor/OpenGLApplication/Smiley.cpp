@@ -17,7 +17,7 @@
 #include <gl/GL.h>          // OpenGL 32-bit library
 #include <gl/GLU.h>         // GLU 32-bit library
 
-Smiley::Smiley(const Vector2f &position, float radius) : position(position), radius(radius)
+Smiley::Smiley(const Vector2f &position, float radius) : position{position}, radius{radius}
 {
     // calculate values that alter the eyes and mouth, which are relative to the radius of the smiley
     eyePosition = Vector2f{0, radius * 0.25f};

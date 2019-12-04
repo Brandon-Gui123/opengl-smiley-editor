@@ -7,10 +7,10 @@
 
 #include <cmath>    // for sqrtf, which finds the square root of a float
 
-Vector2f::Vector2f() : x(0.f), y(0.f)
+Vector2f::Vector2f() : x{0.f}, y{0.f}
 {}
 
-Vector2f::Vector2f(float x, float y) : x(x), y(y)
+Vector2f::Vector2f(float x, float y) : x{x}, y{y}
 {}
 
 float Vector2f::getMagnitude() const

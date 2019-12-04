@@ -9,14 +9,14 @@
 #include <cmath>            // for trigonometric functions like sin and cos
 #include <gl/GL.h>          // OpenGL 32-bit library
 
-PoofParticles::PoofParticles() : position(Vector2f{0, 0}), innerRadius(0), outerRadius(0), numLines(8)
+PoofParticles::PoofParticles() : position{Vector2f{0, 0}}, innerRadius{0}, outerRadius{0}, numLines{8}
 {
     currentInnerRadius = innerRadius;
     currentOuterRadius = innerRadius;
     lineColor = Color4f{1, 0, 0, 1};
 }
 
-PoofParticles::PoofParticles(const Vector2f &position, float innerRadius, float outerRadius, int numLines) : position(position), innerRadius(innerRadius), outerRadius(outerRadius), numLines(numLines)
+PoofParticles::PoofParticles(const Vector2f &position, float innerRadius, float outerRadius, int numLines) : position{position}, innerRadius{innerRadius}, outerRadius{outerRadius}, numLines{numLines}
 {
     currentInnerRadius = innerRadius;
     currentOuterRadius = innerRadius;
