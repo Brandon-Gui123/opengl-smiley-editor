@@ -1,3 +1,7 @@
+# Important Notice
+
+This repository has been archived and marked as read-only. I will not be adding in anymore features.
+
 # opengl-smiley-editor
 
 An OpenGL application where you can place smileys on a blank canvas,
