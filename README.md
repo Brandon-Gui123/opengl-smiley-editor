@@ -1,4 +1,8 @@
-# opengl-smiley-editor
+# Important Notice
+
+This repository is archived since I will not be adding any more features or fixing any more bugs. If you'd like to work on it, feel free to fork this repository.
+
+## opengl-smiley-editor
 
 An OpenGL application where you can place smileys on a blank canvas,
 move them around, resize them and delete them.
